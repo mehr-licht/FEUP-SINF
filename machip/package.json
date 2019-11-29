@@ -17,10 +17,12 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "cd src/api && node app.js",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,5 +41,6 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.7.4"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
