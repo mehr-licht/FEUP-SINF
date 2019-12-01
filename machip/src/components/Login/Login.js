@@ -15,32 +15,41 @@ export default function Login(props) {
   }
 
   return (
-    <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <h1>
-          Sign In
-        </h1>
-        <FormGroup controlId="Username" bsSize="large">
-          <FormControl
-            autoFocus
-            placeholder='Username'
-            type="Username"
-            value={Username}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <FormControl
-            placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-          />
-        </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
-          Login
+    <body>
+      <div className="LoginContainer">
+        <div className="LoginTitle">
+          <h1 align="center">
+            <b>
+              Sign In
+              </b>
+          </h1>
+        </div>
+        <form onSubmit={handleSubmit}>
+
+          <FormGroup controlId="Username" bsSize="large">
+            <FormControl
+              autoFocus
+              placeholder='Username'
+              type="Username"
+              value={Username}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup className ="passwordInput" controlId="password" bsSize="large">
+            <FormControl
+              placeholder='Password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              type="password"
+            />
+          </FormGroup>
+          <div id = "buttonLogin" class="text-center">
+            <Button variant="info" size="md" disabled={!validateForm()} type="submit">
+              Login
         </Button>
-      </form>
-    </div>
+          </div>
+        </form>
+      </div>
+    </body>
   );
 }

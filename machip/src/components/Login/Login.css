@@ -1,13 +1,25 @@
 
-  .Login {
+  .LoginContainer {
     color: #09d3ac;
     background-color: #282c34;
     padding: 60px 0;
-  }
-
-
-  .Login form {
     margin: 0 auto;
-    max-width: 320px;
+    padding: 2em;
+    max-width: 500px;
+    border-radius: 8px;
   }
 
+
+  .LoginTitle {
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+  
+  .passwordInput{
+    margin-top: 2em;
+  }
+
+  #buttonLogin{
+    
+    margin-top: 3em;
+  }
