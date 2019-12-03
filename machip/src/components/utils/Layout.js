@@ -1,10 +1,12 @@
 import React from 'react';
 import Appbar from "./Appbar";
+import Sidebar from "./Sidebar";
 
 const Layout = () => {
 
     return (
-        <Appbar></Appbar>
+        <Sidebar></Sidebar>
+        
     );
 }
 
