@@ -41,7 +41,6 @@ app.get("/token", async (req, res) => {
   axios
     .post("https://identity.primaverabss.com/connect/token", data)
     .then(response => {
-      console.log("Response", response.data);
       this.token = response.data.token_type + " " + response.data.access_token;
       return res.send(response.data);
     })
@@ -55,7 +54,6 @@ app.get("/sales_orders", async (req, res) => {
   axios
     .get("https://my.jasminsoftware.com/api/224895/224895-0001/sales/orders", { headers: { Authorization: this.token } })
     .then(response => {
-      console.log("Response", response.data);
       return res.send(response.data);
     })
     .catch(error => {
@@ -68,7 +66,6 @@ app.get("/purchase_orders", async (req, res) => {
   axios
     .get("https://my.jasminsoftware.com/api/224895/224895-0001/purchases/orders?", { headers: { Authorization: this.token } })
     .then(response => {
-      console.log("Response", response.data);
       return res.send(response.data);
     })
     .catch(error => {
@@ -81,7 +78,6 @@ app.get("/warehouses", async (req, res) => {
   axios
     .get("https://my.jasminsoftware.com/api/224895/224895-0001/materialscore/warehouses", { headers: { Authorization: this.token } })
     .then(response => {
-      console.log("Response", response.data);
       return res.send(response.data);
     })
     .catch(error => {
@@ -94,7 +90,6 @@ app.get("/warehouse_items", async (req, res) => {
   axios
     .get("https://my.jasminsoftware.com/api/224895/224895-0001/materialscore/materialsitems", { headers: { Authorization: this.token } })
     .then(response => {
-      console.log("Response", response.data);
       return res.send(response.data);
     })
     .catch(error => {
@@ -108,7 +103,6 @@ app.get("/delivery_terms", async (req, res) => {
   axios
     .get("https://my.jasminsoftware.com/api/224895/224895-0001/logisticscore/deliveryTerms", { headers: { Authorization: this.token } })
     .then(response => {
-      console.log("Response", response.data);
       return res.send(response.data);
     })
     .catch(error => {

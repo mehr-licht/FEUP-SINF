@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./sale_orders.css";
+import "./purchase_orders.css";
 import ReactTable from "react-table"
 import "react-table/react-table.css"
 
-class SalesOrders extends Component {
+class PurchaseOrders extends Component {
     
     constructor(){
         super();
@@ -14,7 +14,7 @@ class SalesOrders extends Component {
     }
 
     componentDidMount() {
-        fetch('/sales_orders')
+        fetch('/purchase_orders')
         .then(res => res.json())
         .then(sales_orders => this.setState({sales_orders}))
     }
@@ -42,7 +42,7 @@ class SalesOrders extends Component {
             <div className="back">
                 <div>
                     <h1>
-                        Sales Orders
+                        Purchase Orders
                     </h1>
                     <ReactTable
                         columns={columns}
@@ -56,9 +56,6 @@ class SalesOrders extends Component {
                                 textAlign: "center"
                             }
                         }
-                        getTrProps={(state, rowInfo, column, instance) => ({
-                          onClick: e => console.log(rowInfo.original.documentLines)
-                        })}
                     >
 
                     </ReactTable>
@@ -68,4 +65,4 @@ class SalesOrders extends Component {
     }
 }
 
-export default SalesOrders;
+export default PurchaseOrders;

@@ -1,22 +1,17 @@
 import React from 'react';
-import {Navbar} from 'react-bootstrap';
-import './App.css';
 import SalesOrders from "./components/sale_orders/sale_orders";
+import PurchaseOrders from "./components/purchase_orders/purchase_orders";
 import Layout from './components/utils/Layout';
 import './styles/App.css';
 
 function App() {
   //getToken();
   return (
-    <div className="App">
-      <Layout/>
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">
-          React Bootstrap
-        </Navbar.Brand>
-      </Navbar>
+    <div className="App"> 
+      <Layout></Layout>
       <div>
         <SalesOrders></SalesOrders>
+        <PurchaseOrders></PurchaseOrders>
       </div>
       
     </div>

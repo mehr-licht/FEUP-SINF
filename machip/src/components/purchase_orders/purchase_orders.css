@@ -1,0 +1,46 @@
+.back {
+    background-color: #0B0C10;
+}
+
+div h1 {
+    text-align-last: center;
+    background-color: #1F2833;
+    color: #66FCF1;
+    margin: 0;
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+    margin-left: 4em;
+    margin-right: 4em;
+    border-top-left-radius: 0.25em; 
+    border-top-right-radius: 0.25em; 
+}
+
+.ReactTable {
+    margin-left: 10em;
+    margin-right: 10em;
+    border-bottom-left-radius: 0.5em; 
+    border-bottom-right-radius: 0.5em; 
+}
+
+.ReactTable .rt-thead {
+    color: #45A29E;
+}
+
+.ReactTable .pagination-bottom {
+    padding: 1.5rem;
+}
+
+.ReactTable .-pagination .-btn {
+    background-color: #0B0C10;
+    color: #45A29E;
+}
+
+.ReactTable .-pagination .-bnt:disabled {
+    background-color: #0B0C10;
+    color: #45A29E;
+}
+
+.ReactTable .-pagination .-btn:not(disabled) {
+    background-color: #0B0C10;
+    color: #66FCF1;
+}
