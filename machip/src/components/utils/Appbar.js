@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Collapse } from 'reactstrap';
 
-const Appbar = () => {
+const Appbar = (props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
+  
+  const styles = { backgroundColor: '#282c34',width: props.width ,align:'left', position: 'absolute',paddingBottom:'0.3em', right:props.right};
+
   return (
-    <Navbar color='faded' light>
+    <Navbar style = {styles} light>
       <NavbarToggler onClick={toggleNavbar} className='mr-2' />
       <NavbarBrand href='/'>MaChip</NavbarBrand>
       <Collapse isOpen={!collapsed} navbar>
