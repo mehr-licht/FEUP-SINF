@@ -17,7 +17,7 @@ const Appbar = (props) => {
     <Navbar style={styles} light>
       <NavbarToggler onClick={toggleNavbar} className='mr-2' />
       <NavbarBrand style ={{color:"#45A29E"}} href='/'>
-      <object style={{height:'25px'}} data={logo} type="image/svg+xml"></object>
+      <object style={{height:'25px'}} data={logo} title="machip logo" type="image/svg+xml"></object>
         <b>MaChip</b>
       </NavbarBrand>
 
