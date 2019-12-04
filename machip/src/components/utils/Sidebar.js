@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import { Collapse, NavLink, Button, Nav } from 'reactstrap';
+import { Collapse, NavLink, Nav } from 'reactstrap';
 
 const Sidebar = (props) => {
 
-
-
-
-
-    const [isOpen, setIsOpen] = useState(false);
-
     const [collapse, setCollapse] = useState(false);
-    const [status, setStatus] = useState('Closed');
+    const [setStatus] = useState('Closed');
 
 
     const onEntering = () => setStatus(1);
