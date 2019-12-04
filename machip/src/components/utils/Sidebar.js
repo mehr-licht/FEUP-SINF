@@ -6,6 +6,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 
@@ -38,8 +39,11 @@ const Sidebar = (props) => {
 
     const classes = useStyles();
 
+    const iconList = [DashboardIcon,];
+
     return (
         <Drawer
+            style = {{zIndex:'-1', position: 'absolute'}}
             className={classes.drawer}
             variant="permanent"
             classes={{
@@ -49,7 +53,7 @@ const Sidebar = (props) => {
         >
             <div className={classes.toolbar} />
             <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            {['Overview', 'Sales', 'Orders', 'Picking'].map((text, index) => (
                 <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon htmlColor="white"/> : <MailIcon htmlColor="white"/>}</ListItemIcon>
                 <ListItemText primary={text} />

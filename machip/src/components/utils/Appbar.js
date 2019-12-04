@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import logo from '../../chip.svg';
-import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Collapse, Modal, Button } from 'reactstrap';
+import { Nav, Navbar, NavbarBrand, NavItem, NavLink, Collapse, Modal, Button } from 'reactstrap';
 import '../../styles/utils/Sidebar.css';
 import Login from "./Login/Login";
 const Appbar = (props) => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed] = useState(true);
 
-  const toggleNavbar = () => setCollapsed(!collapsed);
-
-  const styles = { backgroundColor: '#1F2833', width: props.width, align: 'left', position: 'absolute', paddingBottom: '0.3em', right: props.right ,zIndex:'1'};
+  const styles = {  position: 'absolute', zIndex:'1',backgroundColor: '#0B0C10', width: props.width, align: 'left', paddingBottom: '0.3em', right: props.right};
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
   return (
     <Navbar style={styles} light>
-      <NavbarToggler onClick={toggleNavbar} className='mr-2' />
       <NavbarBrand style ={{color:"#45A29E"}} href='/'>
       <object style={{height:'25px'}} data={logo} title="machip logo" type="image/svg+xml"></object>
         <b>MaChip</b>
