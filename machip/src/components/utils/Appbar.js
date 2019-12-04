@@ -9,7 +9,7 @@ const Appbar = (props) => {
   const toggleNavbar = () => setCollapsed(!collapsed);
 
 
-  const styles = { backgroundColor: '#0B0C10', width: props.width, align: 'left', position: 'absolute', paddingBottom: '0.3em', right: props.right };
+  const styles = { backgroundColor: '#0B0C10', width: props.width, align: 'left', position: 'absolute', paddingBottom: '0.3em', right: props.right ,zIndex:'1'};
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -22,10 +22,9 @@ const Appbar = (props) => {
       </NavbarBrand>
 
       <Button style={{ position: 'relative' }} color="success" onClick={toggle}>Login</Button>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalBody style={{ backgroundColor: '#282c34' }} className='dark'>
-          <Login />
-        </ModalBody>
+      <Modal className = "ModalContainer" isOpen={modal} toggle={toggle}>
+      <Login />
+
       </Modal>
       <Collapse isOpen={!collapsed} navbar>
         <Nav vertical navbar>

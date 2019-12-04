@@ -1,13 +1,19 @@
 
   .LoginContainer {
-    color: #09d3ac;
-    background-color: #282c34;
-    padding: 60px 0;
+    color: #66fcf6;
+    background-color: #1F2833;
     margin: 0 auto;
     padding: 2em;
     max-width: 500px;
   }
 
+  .ModalContainer {
+    display: block;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 20px;
+  }
 
   .LoginTitle {
     margin-top: 3em;
