@@ -8,8 +8,9 @@ const Sidebar = (props) => {
     const [collapse, setCollapse] = useState(false);
 
     const toggle = () => setCollapse(!collapse);
-
-    const styles = { backgroundColor: '#1F2833', width: props.width, align: 'left', position: 'absolute', right: props.right, zIndex: 1, height: '100%' };
+    const value = collapse ? '100%' : '0%';
+    const styles = { 
+        transition: 'all linear 0.3s',backgroundColor: '#1F2833', width: props.width, align: 'left', position: 'absolute', right: props.right, zIndex: 1,  height: value };
 
     const stylesNav = {backgroundColor: '#0B0C10'};
     const styleMenu = {backgroundColor:'#0B0C10'};
