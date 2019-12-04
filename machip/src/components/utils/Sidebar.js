@@ -2,13 +2,19 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
+
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import PeopleIcon from '@material-ui/icons/People';
+
+
+
+
 
 const drawerWidth = 240;
 
@@ -39,7 +45,6 @@ const Sidebar = (props) => {
 
     const classes = useStyles();
 
-    const iconList = [DashboardIcon,];
 
     return (
         <Drawer
@@ -55,7 +60,7 @@ const Sidebar = (props) => {
             <List>
             {['Overview', 'Sales', 'Orders', 'Picking'].map((text, index) => (
                 <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon htmlColor="white"/> : <MailIcon htmlColor="white"/>}</ListItemIcon>
+                <ListItemIcon>{index % 2 === 0 ? (index - 2 === 0 ? <AssignmentIcon htmlColor="white"/> : <DashboardIcon htmlColor="white"/>) : (index - 3 === 0 ? <LocalShippingIcon htmlColor="white"/> : <PeopleIcon htmlColor="white"/>)}</ListItemIcon>
                 <ListItemText primary={text} />
                 </ListItem>
             ))}
