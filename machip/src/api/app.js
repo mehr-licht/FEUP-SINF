@@ -79,7 +79,7 @@ app.get("/sales_orders", async (req, res) => {
 
 app.get("/purchase_orders", async (req, res) => {
     axios
-        .get("https://my.jasminsoftware.com/api/224895/224895-0001/purchases/orders?", { headers: { Authorization: this.token } })
+        .get("https://my.jasminsoftware.com/api/224895/224895-0001/purchases/orders", { headers: { Authorization: this.token } })
         .then(response => {
             console.log("Response", response.data);
             return res.send(response.data);
@@ -90,6 +90,18 @@ app.get("/purchase_orders", async (req, res) => {
         });
 });
 
+app.get("/purchase_orders/:id", async (req, res) => {
+    axios
+        .get("https://my.jasminsoftware.com/api/224895/224895-0001/purchases/orders/" + req.params.id, { headers: { Authorization: this.token } })
+        .then(response => {
+            console.log("Response", response.data);
+            return res.send(response.data);
+        })
+        .catch(error => {
+            console.log("Error", error);
+            return res.send({ message: error });
+        });
+});
 app.get("/warehouses", async (req, res) => {
     axios
         .get("https://my.jasminsoftware.com/api/224895/224895-0001/materialscore/warehouses", { headers: { Authorization: this.token } })

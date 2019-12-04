@@ -14,8 +14,15 @@ const MachipTableHeaders = {
             "id",
             "company",
             "Gross Value",
-            "Customer",
+            "Customer"
         ],
+    purchase_orders:
+        [
+            "id",
+            "company",
+            "Gross Value",
+            "Customer"
+        ]
  };
 
 export default MachipTableHeaders;
