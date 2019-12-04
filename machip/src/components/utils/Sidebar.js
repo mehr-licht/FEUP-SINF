@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import { Collapse, NavLink, Nav } from 'reactstrap';
 
+
+
 const Sidebar = (props) => {
 
     const [collapse, setCollapse] = useState(false);
-    const [setStatus] = useState('Closed');
-
-
-    const onEntering = () => setStatus(1);
-
-    const onEntered = () => setStatus(0);
-
-    const onExiting = () => setStatus(1);
-
-    const onExited = () => setStatus(1);
 
     const toggle = () => setCollapse(!collapse);
 
@@ -35,12 +27,8 @@ const Sidebar = (props) => {
                     <b>MENU</b>
                 </NavLink>
             </div>
-            <Collapse isOpen={collapse}
-                onEntering={onEntering}
-                onEntered={onEntered}
-                onExiting={onExiting}
-                onExited={onExited}>
-                <Nav style={stylesNav} className = "SideLink" vertical>
+            <Collapse isOpen={collapse}>
+                <Nav className = "SideLink" vertical>
 
                     <NavLink style={navText} tag="a" href="#" action>
                         <svg width="1.5rem" height="1.5rem" viewBox="0 0 1.5rem 1.5rem" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +42,7 @@ const Sidebar = (props) => {
                         </svg>
                         <b>Sales</b>
                     </NavLink>
-                    <NavLink className="SideLink" style={navText} href="#">
+                    <NavLink style={navText} href="#">
                         <svg width="1.5rem" height="1.5rem" viewBox="0 0 1.5rem 1.5rem" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M19 3H14.82C14.4 1.84 13.3 1 12 1C10.7 1 9.60001 1.84 9.17999 3H5C3.89999 3 3 3.89999 3 5V21C3 22.1 3.89999 23 5 23H19C20.1 23 21 22.1 21 21V5C21 3.89999 20.1 3 19 3ZM12 3C12.55 3 13 3.45001 13 4C13 4.54999 12.55 5 12 5C11.45 5 11 4.54999 11 4C11 3.45001 11.45 3 12 3ZM5 5V21H19V5H17V8H7V5H5Z" fill="#c5c6c7" fill-opacity="0.54" />
                         </svg>

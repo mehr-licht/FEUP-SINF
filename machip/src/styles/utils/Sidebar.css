@@ -1,4 +1,3 @@
-.SideLink :hover {
+.SideLink:first-child > :hover {
   opacity: 0.7;
-
 }

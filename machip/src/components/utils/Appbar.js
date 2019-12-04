@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from '../../chip.svg';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Collapse, ModalBody, Modal, Button } from 'reactstrap';
-
+import '../../styles/utils/Sidebar.css';
 import Login from "./Login/Login";
 const Appbar = (props) => {
   const [collapsed, setCollapsed] = useState(true);
