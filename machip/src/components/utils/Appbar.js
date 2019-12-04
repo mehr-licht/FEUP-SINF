@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../chip.svg';
-import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Collapse, ModalBody, Modal, Button } from 'reactstrap';
+import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Collapse, Modal, Button } from 'reactstrap';
 import '../../styles/utils/Sidebar.css';
 import Login from "./Login/Login";
 const Appbar = (props) => {
@@ -8,8 +8,7 @@ const Appbar = (props) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-
-  const styles = { backgroundColor: '#0B0C10', width: props.width, align: 'left', position: 'absolute', paddingBottom: '0.3em', right: props.right ,zIndex:'1'};
+  const styles = { backgroundColor: '#1F2833', width: props.width, align: 'left', position: 'absolute', paddingBottom: '0.3em', right: props.right ,zIndex:'1'};
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
