@@ -1,10 +1,10 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-//import { getToken } from "./api/apiRequests";
+import { tokenApiRequest } from "./api/tokenApiRequest";
 
 function App() {
-  //getToken();
+  tokenApiRequest();
   return (
     <div className="App">
       <header className="App-header">
