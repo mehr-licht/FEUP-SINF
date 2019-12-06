@@ -13,6 +13,20 @@ const ReplaceTextFunction = (txt) => {
     return txt.join(' '); 
 }
 
+function removeDup(info){
+    var seriesNumbers = [];
+    var final_info = [];
+    info.forEach(element => {
+        if(!seriesNumbers.includes(element.seriesNumber)){
+            if(element.documentStatus == 2){
+                seriesNumbers.push(element.seriesNumber);
+                final_info.push(element);
+            }
+        }
+    });
+    return final_info
+}
+
 class MachipTable extends Component {
     
     constructor(props) {
@@ -37,8 +51,8 @@ class MachipTable extends Component {
         const { info } = this.state;
         const { endpoint } = this.props;
         const  tableHeaders  = MachipTableHeaders[`${endpoint}`];
-       
-        console.log(info);
+        var info_final = removeDup(info);
+        console.log(info_final);
         return (
             <div>
                 <h2> {ReplaceTextFunction(`${ endpoint }`)}</h2>
@@ -52,7 +66,7 @@ class MachipTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {info.map((item, i) =>
+                        {info_final.map((item, i) =>
                             <MachipTableRow key={i} request={endpoint} item={item} i={i} />
                         )}
                     </tbody>

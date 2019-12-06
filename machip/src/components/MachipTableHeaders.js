@@ -21,6 +21,7 @@ const MachipTableHeaders = {
             "id",
             "company",
             "Gross Value",
+            "Status",
             "Customer"
         ]
  };

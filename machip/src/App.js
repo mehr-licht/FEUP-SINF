@@ -43,6 +43,7 @@ function App() {
           <Route exact path="/DeliveryTerms/:id" render={(props) => <MachipCard {...props} endpoint={"delivery_terms"} />} />
           <Route exact path="/SalesOrders/:id" render={(props) => <MachipCard {...props} endpoint={"sales_orders"} />} />
           <Route exact path="/PurchaseOrders/:id" render={(props) => <MachipCard {...props} endpoint={"purchase_orders"} />} />
+          <Route exact path="/item_description/:id" render={(props) => <MachipCard {...props} endpoint={"item_description"} />} />
         <Route path="/SalesOrders">
            <MachipTable endpoint="sales_orders" />  
         </Route>

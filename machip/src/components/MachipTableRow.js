@@ -35,7 +35,8 @@ class MachipTableRow extends React.Component{
 			<tr onClick={clickCallback} key={item.id}>
                 <td>{item.seriesNumber}</td>
 			    <td>{item.accountingPartyAddress}</td>
-			    <td>{item.grossValue.amount}</td>
+			    <td>{item.payableAmount.amount}</td>
+			    <td>{item.documentStatus}</td>
 			    <td>{item.documentDate}</td>			
 			</tr>
         ];

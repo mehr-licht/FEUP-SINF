@@ -154,3 +154,16 @@ app.get("/delivery_terms", async (req, res) => {
             return res.send({ message: error });
         });
 });
+
+app.get("/item_description/:id", async (req, res) => {
+    axios
+        .get("https://my.jasminsoftware.com/api/224895/224895-0001/materialscore/materialsitems/" + req.params.id + "/extension", { headers: { Authorization: this.token } })
+        .then(response => {
+            console.log("Response", response.data);
+            return res.send(response.data);
+        })
+        .catch(error => {
+            console.log("Error", error);
+            return res.send({ message: error });
+        });
+});
