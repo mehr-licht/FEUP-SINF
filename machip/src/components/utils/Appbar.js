@@ -1,38 +1,77 @@
-import React, { useState } from 'react';
-import logo from '../../chip.svg';
-import { Nav, Navbar, NavbarBrand, NavItem, NavLink, Collapse, Modal, Button } from 'reactstrap';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Grow from '@material-ui/core/Grow';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import MemoryIcon from '@material-ui/icons/Memory';
+
 import '../../styles/utils/Sidebar.css';
 import Login from "./Login/Login";
-const Appbar = (props) => {
-  const [collapsed] = useState(true);
 
-  const styles = {  position: 'absolute', zIndex:'1',backgroundColor: '#0B0C10', width: props.width, align: 'left', paddingBottom: '0.3em', right: props.right};
-  const [modal, setModal] = useState(false);
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  loginButton: {
+    marginRight: theme.spacing(2),
+    color: '#FFF'
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: 'left',
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+}));
 
-  const toggle = () => setModal(!modal);
+const Appbar = () => {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Navbar style={styles} light>
-      <NavbarBrand style ={{color:"#45A29E"}} href='/'>
-      <object style={{height:'25px'}} data={logo} title="machip logo" type="image/svg+xml"></object>
-        <b>MaChip</b>
-      </NavbarBrand>
-
-      <Button style={{ position: 'relative' }} color="success" onClick={toggle}>Login</Button>
-      <Modal className = "ModalContainer" isOpen={modal} toggle={toggle}>
-      <Login />
-
+    <AppBar position="static">
+      <Toolbar>
+        <SvgIcon component={MemoryIcon} fontSize='large'/>
+        <Typography variant="h4" className={classes.title}>
+          MaChip
+        </Typography>
+        <Button className={classes.loginButton} onClick={handleOpen}>Login</Button>
+        <Modal
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+        <Grow 
+          in={open}
+          style={{ transformOrigin: '0 0 0' }}
+          {...(open ? { timeout: 1000 } : {})}>
+          <Login />
+        </Grow>
       </Modal>
-      <Collapse isOpen={!collapsed} navbar>
-        <Nav vertical navbar>
-          <NavItem>
-            <NavLink href='/components/'>Components</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href='https://github.com/reactstrap/reactstrap'>GitHub</NavLink>
-          </NavItem>
-        </Nav>
-      </Collapse>
-    </Navbar>
+        
+      </Toolbar>
+    </AppBar>
   );
 }
 
