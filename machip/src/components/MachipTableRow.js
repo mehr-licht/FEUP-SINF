@@ -43,12 +43,15 @@ class MachipTableRow extends React.Component{
         
         if(this.state.expandedRows.includes(item.id)) {
             item.documentLines.forEach(item2 =>{
-                itemRows.push(
-                    <tr key = {item2.id}>
-                        <td>{item2.description}</td>
-                        <td>{item2.quantity}</td>
-                    </tr>
-                );
+                if (item2.quantity - item2.invoicedQuantity > 0) {
+                    itemRows.push(
+                        <tr key = {item2.id}>
+                            <td>{item2.description}</td>
+                            <td>{item2.quantity - item2.invoicedQuantity}</td>
+                        </tr>
+                    );
+                    
+                }
             })
         }
         

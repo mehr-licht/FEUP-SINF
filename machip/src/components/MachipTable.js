@@ -18,7 +18,7 @@ function removeDup(info){
     var final_info = [];
     info.forEach(element => {
         if(!seriesNumbers.includes(element.seriesNumber)){
-            if(element.documentStatus == 2){
+            if(element.documentStatus == 1 && element.isDeleted == false){
                 seriesNumbers.push(element.seriesNumber);
                 final_info.push(element);
             }
@@ -51,6 +51,7 @@ class MachipTable extends Component {
         const { info } = this.state;
         const { endpoint } = this.props;
         const  tableHeaders  = MachipTableHeaders[`${endpoint}`];
+        console.log(info);
         var info_final = removeDup(info);
         console.log(info_final);
         return (
