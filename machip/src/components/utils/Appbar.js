@@ -10,12 +10,11 @@ import Grow from '@material-ui/core/Grow';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import MemoryIcon from '@material-ui/icons/Memory';
 
-import '../../styles/utils/Sidebar.css';
 import Login from "./Login/Login";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
+  appBar: {
+    background: '#1f2833',
   },
   loginButton: {
     marginRight: theme.spacing(2),
@@ -45,7 +44,7 @@ const Appbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar className={classes.appBar} position="static">
       <Toolbar>
         <SvgIcon component={MemoryIcon} fontSize='large'/>
         <Typography variant="h4" className={classes.title}>

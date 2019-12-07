@@ -5,10 +5,8 @@ import Sidebar from "./Sidebar";
 const Layout = () => {
     return (
         <div>
-            
             <Sidebar />
-            <Appbar width="100%">
-            </Appbar>
+            <Appbar />
         </div>
     );
 }
