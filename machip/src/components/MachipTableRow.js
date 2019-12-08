@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Checkbox } from 'antd';
 
 const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -7,7 +7,9 @@ const formatTimestamp = (timestamp) => {
         ${date.getHours() < 10 ? "0" : ""}${date.getHours()}:${date.getMinutes() < 10 ? "0" : ""}${date.getMinutes()}`;
 };
 
-
+function onChange(e) {
+    console.log(`checked = ${e.target.checked}`);
+}
 
 class MachipTableRow extends React.Component{
 
@@ -37,17 +39,21 @@ class MachipTableRow extends React.Component{
 			    <td>{item.accountingPartyAddress}</td>
 			    <td>{item.payableAmount.amount}</td>
 			    <td>{item.documentStatus}</td>
-			    <td>{item.documentDate}</td>			
+			    <td>{formatTimestamp(item.documentDate)}</td>			
 			</tr>
         ];
-        
-        if(this.state.expandedRows.includes(item.id)) {
+
+        if (this.state.expandedRows.includes(item.id)) {
+    
             item.documentLines.forEach(item2 =>{
                 if (item2.quantity - item2.invoicedQuantity > 0) {
                     itemRows.push(
-                        <tr key = {item2.id}>
+                        <tr key={item2.id}>
+                            <td></td>
+                            <td></td>
                             <td>{item2.description}</td>
                             <td>{item2.quantity - item2.invoicedQuantity}</td>
+                            <td><Checkbox onChange={onChange}></Checkbox></td>
                         </tr>
                     );
                     
@@ -58,44 +64,12 @@ class MachipTableRow extends React.Component{
         return itemRows;    
     }
     render() {
-        const { request, item, i } = this.props;
+        const { item } = this.props;
         let allItemRows = [];  
         const perItemRows = this.renderItem(item);
-        switch (request) {
-            case 'delivery_terms':
-                return (
-                    <tr>
-                        {/* //createdBy: "<Sys>"
-                        // createdOn: "2019-08-01T11:07:31.1394609+00:00"
-                       // deliveryitemKey: "N-VIATURA"
-                    //description: "Nossa viatura"
-                        //id: "c952d8a1-9857-4613-8523-ab30fafaabf1"
-                      //  isActive: true
-                    //isDeleted: false
-                        //modifiedBy: "<Sys>"
-                        //modifiedOn: "2019-08-01T11:07:31.1394609+00:00" */}
-                        {/* <td>{item.id}</td> */}
-                        <td> {i + 1}</td >
-                        <td>{item.isActive && !item.isDeleted ? "ok" : "x"}</td>
-                        <td> <Link to={`/DeliveryTerms/${item.id}`}>{item.description}</Link></td>
-                        <td>{formatTimestamp(item.createdOn)}</td>
-                        <td>{item.createdBy}</td>
-                        <td>{item.modifiedOn !== item.createdOn ? "modified on"`${formatTimestamp(item.modifiedOn)}` : ""}</td>
-                        <td>{item.modifiedBy !== item.createdBy ? "modified by"`${item.modifiedBy}` : ""}</td>
-                    </tr>
-                )
-            case 'sales_orders':
-                return (
-                    allItemRows = allItemRows.concat(perItemRows)
-                )
-            case 'purchase_orders':
-                console.log(item)                      
-                return (
-                    allItemRows = allItemRows.concat(perItemRows)
-                )
-            default:
-                break;
-        }
+            return (
+                allItemRows = allItemRows.concat(perItemRows)
+            )
     }
 }
 
