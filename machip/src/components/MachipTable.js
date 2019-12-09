@@ -16,14 +16,18 @@ const ReplaceTextFunction = (txt) => {
 function removeDup(info){
     var seriesNumbers = [];
     var final_info = [];
-    info.forEach(element => {
-        if(!seriesNumbers.includes(element.seriesNumber)){
-            if(element.documentStatus === 1 && element.isDeleted === false){
-                seriesNumbers.push(element.seriesNumber);
-                final_info.push(element);
+    if (info.length) {
+        info.forEach(element => {
+            if (!seriesNumbers.includes(element.seriesNumber)) {
+                if (element.documentStatus === 1 && element.isDeleted === false) {
+                    seriesNumbers.push(element.seriesNumber);
+                    final_info.push(element);
+                }
             }
-        }
-    });
+        })
+    } else {
+        console.log("no items found");
+    };
     return final_info
 }
 
@@ -38,6 +42,7 @@ class MachipTable extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.endpoint);
         MyFetch(`${this.props.endpoint}`,
             (info) => {
                 this.setState({ info });

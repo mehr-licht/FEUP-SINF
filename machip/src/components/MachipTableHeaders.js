@@ -24,7 +24,15 @@ const MachipTableHeaders = {
             "Gross Value",
             "Status",
             "Date",
-        ]
+        ],
+    goods_receipt:
+        [
+            "id",
+            "company",
+            "Gross Value",
+            "Status",
+            "Date",
+        ],
  };
 
 export default MachipTableHeaders;

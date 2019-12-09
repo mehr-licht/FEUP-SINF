@@ -13,7 +13,7 @@ const ReplaceTextFunction = (txt) => {
     return txt.join(' ');
 }
 
-class MachipCard extends Component {
+class MachipGoodsReceipt extends Component {
 
     constructor(props) {
         super(props);
@@ -26,7 +26,7 @@ class MachipCard extends Component {
     componentDidMount() {
         console.log(this.props.match.params);
         console.log(`${this.props.endpoint}/${this.props.match.params.id}`);
-        MyFetch(`${this.props.endpoint}/${ this.props.match.params.id }`,
+        MyFetch(`${this.props.endpoint}/${this.props.match.params.page}/${this.props.match.params.size}`,
             (info) => {
                 console.log("INFO PLEASE", info);
                 this.setState({ info });
@@ -40,24 +40,28 @@ class MachipCard extends Component {
         const { info } = this.state;
         const { endpoint } = this.props;
         console.log();
-       // const tableHeaders = MachipTableHeaders[`${endpoint}`];
+        // const tableHeaders = MachipTableHeaders[`${endpoint}`];
         return (
             <div>
                 <h2> {ReplaceTextFunction(`${endpoint}`)}</h2>
                 <Table striped bordered hover responsive="sm" >
                     <tbody>
                         {Object.entries(info).map(([key, value]) =>
+                        
+                            // key !== "isDeleted" ? (<tr key={key}></tr   >) :
+                                (
                             // {console.log(typeof value)}//documentLines
-                        <tr key={key}>
-                        <td>{key}</td>
-                        <td>{value}</td>
+                            <tr key={key}>
+                                <td>{key}</td>
+                                {/* <td>{value}</td> */}
                             </tr>
+                        )
                         )}
                     </tbody>
-                </Table>                  
+                </Table>
             </div>
         );
     }
 }
 
-export default MachipCard;
+export default MachipGoodsReceipt;

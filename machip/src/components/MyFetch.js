@@ -6,6 +6,7 @@ function MyFetch(endpoint, callback, errorcallback) {
         }
 
     })
+    console.log(endpoint);
     fetch(`/${endpoint}`, {
         headers: {
             'Content-Type': 'application/json',
