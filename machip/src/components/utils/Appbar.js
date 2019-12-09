@@ -61,12 +61,12 @@ const Appbar = () => {
             timeout: 500,
           }}
         >
-        <Grow 
-          in={open}
-          style={{ transformOrigin: '0 0 0' }}
-          {...(open ? { timeout: 1000 } : {})}>
-          <Login />
-        </Grow>
+          <Grow 
+            in={open}
+            style={{ transformOrigin: '0 0 0' }}
+            {...(open ? { timeout: 1000 } : {})}>
+            <Login />
+          </Grow>
       </Modal>
         
       </Toolbar>

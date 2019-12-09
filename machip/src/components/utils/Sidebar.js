@@ -14,6 +14,9 @@ import PeopleIcon from '@material-ui/icons/People';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        width: '100%'
+    },
     appBar: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
