@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import { Router, Link } from "@reach/router"
+import { Router } from '@reach/router';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import theme from './theme';

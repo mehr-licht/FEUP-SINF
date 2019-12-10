@@ -3,10 +3,7 @@ import palette from './palette';
 
 const theme = createMuiTheme({
   palette,
-  zIndex: {
-    appBar: 1200,
-    drawer: 1100
-  }
+  spacing: 8
 });
 
 export default theme;
