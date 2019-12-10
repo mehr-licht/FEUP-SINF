@@ -2,12 +2,15 @@ import React from 'react';
 import Appbar from "./Appbar";
 import Sidebar from "./Sidebar";
 
-const Layout = () => {
+const Layout = ({children}) => {
     return (
-        <div>
+        <>
             <Sidebar />
             <Appbar />
-        </div>
+            <div>
+                {children}
+            </div>
+        </>
     );
 }
 

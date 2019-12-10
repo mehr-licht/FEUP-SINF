@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Sidebar = (props) => {
+const Sidebar = () => {
 
     const classes = useStyles();
 
@@ -56,12 +56,12 @@ const Sidebar = (props) => {
         >
             <div className={classes.toolbar} />
             <List>
-            {['Overview', 'Sales', 'Orders', 'Picking'].map((text, index) => (
-                <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? (index - 2 === 0 ? <AssignmentIcon htmlColor="white"/> : <DashboardIcon htmlColor="white"/>) : (index - 3 === 0 ? <LocalShippingIcon htmlColor="white"/> : <PeopleIcon htmlColor="white"/>)}</ListItemIcon>
-                <ListItemText primary={text} />
-                </ListItem>
-            ))}
+                {['Overview', 'Sales', 'Orders', 'Picking'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>{index % 2 === 0 ? (index - 2 === 0 ? <AssignmentIcon htmlColor="white"/> : <DashboardIcon htmlColor="white"/>) : (index - 3 === 0 ? <LocalShippingIcon htmlColor="white"/> : <PeopleIcon htmlColor="white"/>)}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
             </List>
             <Divider />
         </Drawer>

@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import Layout from './components/utils/Layout';
+import { Router, Link } from "@reach/router"
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
 import theme from './theme';
 
-export default class App extends Component {
-  render() {
+const App = () => {
     return (
       <ThemeProvider theme={theme}>
-          <Layout/>
+          <Router>
+            <Home path="/" />
+            <Dashboard path="/dashboard" />
+          </Router>
       </ThemeProvider>
     );
-  }
 }
+
+export default App;
