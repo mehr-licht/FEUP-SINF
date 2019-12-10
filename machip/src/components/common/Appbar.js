@@ -6,18 +6,23 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import MemoryIcon from '@material-ui/icons/Memory';
+import palette from '../../theme/palette'
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    background: '#1f2833',
+    background: palette.black,
   },
   loginButton: {
     marginRight: theme.spacing(2),
-    color: '#FFF'
+    color: palette.green
   },
   title: {
     flexGrow: 1,
     textAlign: 'left',
+    color: palette.neon_green
+  },
+  icon: {
+    color: palette.neon_green
   },
   modal: {
     display: 'flex',
@@ -31,7 +36,7 @@ const Appbar = () => {
   return (
     <AppBar className={classes.appBar} position="static">
       <Toolbar>
-        <SvgIcon component={MemoryIcon} fontSize='large'/>
+        <SvgIcon className={classes.icon} component={MemoryIcon} fontSize='large'/>
         <Typography variant="h4" className={classes.title}>
           MaChip
         </Typography>
