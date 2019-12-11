@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import MemoryIcon from '@material-ui/icons/Memory';
+import { navigate } from '@reach/router';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -43,7 +44,11 @@ const Appbar = () => {
         <Typography variant="h4" className={classes.title}>
           MaChip
         </Typography>
-        <Button variant="outlined" className={classes.loginButton}>Logout</Button>
+        <Button variant="outlined"
+         className={classes.loginButton}
+         onClick={ () => {navigate('/')}}
+         >Logout
+        </Button>
       </Toolbar>
     </AppBar>
   );
