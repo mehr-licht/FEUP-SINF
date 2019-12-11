@@ -1,25 +1,34 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { CssBaseline } from '@material-ui/core';
 import Appbar from "./Appbar";
 import Sidebar from "./Sidebar";
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        minHeight: '100vh'
+    },
     contentBox: {
-        backgroundColor: theme.palette.black
-    }
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        backgroundColor: theme.palette.black,
+    },
+    toolbar: theme.mixins.toolbar
 }));
 
 const Layout = ({children}) => {
     const classes = useStyles();
     return (
-        <>
-            <Sidebar />
+        <div className={classes.root}>
+            <CssBaseline />
             <Appbar />
-            <Box mx={30} height='calc(100vh - 64px)' width='calc(100% - 240px)' className={classes.contentBox}>
+            <Sidebar />
+            <main className={classes.contentBox}>
+                <div className={classes.toolbar} />
                 {children}
-            </Box>
-        </>
+            </main>
+        </div>
     );
 }
 

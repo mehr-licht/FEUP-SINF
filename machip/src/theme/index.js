@@ -3,7 +3,6 @@ import palette from './palette';
 
 const theme = createMuiTheme({
   palette,
-  spacing: 8
 });
 
 export default theme;

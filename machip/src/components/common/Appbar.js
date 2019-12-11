@@ -10,6 +10,7 @@ import MemoryIcon from '@material-ui/icons/Memory';
 const useStyles = makeStyles(theme => ({
   appBar: {
     background: theme.palette.gray,
+    zIndex: theme.zIndex.drawer + 1
   },
   loginButton: {
     marginRight: theme.spacing(2),
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
   icon: {
     color: theme.palette.neon_green
   },
+  toolbar: theme.mixins.toolbar,
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -35,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 const Appbar = () => {
   const classes = useStyles();
   return (
-    <AppBar className={classes.appBar} position="static">
+    <AppBar className={classes.appBar} position="fixed">
       <Toolbar>
         <SvgIcon className={classes.icon} component={MemoryIcon} fontSize='large'/>
         <Typography variant="h4" className={classes.title}>

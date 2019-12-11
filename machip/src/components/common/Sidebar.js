@@ -43,7 +43,6 @@ const Sidebar = () => {
 
     return (
         <Drawer
-            style = {{zIndex:'-1', position: 'absolute'}}
             className={classes.drawer}
             variant="permanent"
             classes={{
