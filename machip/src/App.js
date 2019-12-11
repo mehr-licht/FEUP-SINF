@@ -11,6 +11,7 @@ import MachipCard from "./components/MachipCard";
 import MachipGoodsReceipt from "./components/MachipGoodsReceipt";
 
 function App() {
+  tokenApiRequest();
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
