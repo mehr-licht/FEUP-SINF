@@ -52,6 +52,25 @@ app.get("/token", async (req, res) => {
         });
 });
 
+app.get("/goods_receipt", async (req, res) => {
+    let data = qs.stringify({
+        SourceDocKey: "ECF.2019.7",
+        SourceDocLineNumber: 1,
+        quantity: 5
+    });
+    axios
+        .post(`https://my.jasminsoftware.com/api/224895/224895-0001/goodsreceipt/processOrders/FEUP-AI`, data, { headers: { Authorization: this.token }})
+        .then(response => {
+            console.log("Response", response.data);
+            return res.send(response.data);
+        })
+        .catch(error => {
+            console.log("Error", error);
+            return res.send({ message: error });
+        });
+});
+
+
 app.get("/sales_orders/:id", async (req, res) => {
     axios
         .get("https://my.jasminsoftware.com/api/224895/224895-0001/sales/orders/" + req.params.id, { headers: { Authorization: this.token } })

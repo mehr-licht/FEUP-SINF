@@ -1,15 +1,12 @@
 import React from "react";
 import { Checkbox } from 'antd';
-
 const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
     return `${date.toLocaleDateString()},
         ${date.getHours() < 10 ? "0" : ""}${date.getHours()}:${date.getMinutes() < 10 ? "0" : ""}${date.getMinutes()}`;
 };
 
-function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
-}
+const pickedItems = []
 
 class MachipTableRow extends React.Component{
 
@@ -20,6 +17,22 @@ class MachipTableRow extends React.Component{
             expandedRows: []
         }
     }
+
+    
+    onChange(e) {
+        if (e.target.checked) {
+            pickedItems.push(e.target.value);
+        }
+        else{
+            const removeIndex = pickedItems.map(function(elem) {
+                return elem.id;
+            }).indexOf(e.target.value.id);
+            pickedItems.splice(removeIndex, 1);
+        }
+        console.log(e.target.value);
+    }
+
+
     handleRowClick(rowId) {
         const currentExpandedRows = this.state.expandedRows;
         const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
@@ -46,14 +59,14 @@ class MachipTableRow extends React.Component{
         if (this.state.expandedRows.includes(item.id)) {
     
             item.documentLines.forEach(item2 =>{
-                if (item2.quantity - item2.invoicedQuantity > 0) {
+                if (item2.quantity - item2.receivedQuantity > 0) {
                     itemRows.push(
                         <tr key={item2.id}>
                             <td></td>
                             <td></td>
                             <td>{item2.description}</td>
-                            <td>{item2.quantity - item2.invoicedQuantity}</td>
-                            <td><Checkbox onChange={onChange}></Checkbox></td>
+                            <td>{item2.quantity - item2.receivedQuantity}</td>
+                            <td><Checkbox value2={item} value={item2} onChange={this.onChange}></Checkbox></td>
                         </tr>
                     );
                     
@@ -63,6 +76,7 @@ class MachipTableRow extends React.Component{
         
         return itemRows;    
     }
+
     render() {
         const { item } = this.props;
         let allItemRows = [];  
