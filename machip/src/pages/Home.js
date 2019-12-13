@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import MemoryIcon from '@material-ui/icons/Memory';
-import { Card, Hidden } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 
 
@@ -40,10 +40,11 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.green
   },
   typography: {
-    color: theme.palette.neon_green
-
+    color: theme.palette.neon_green,
   },
   textField: {
+    position: 'relative',
+
     '& .MuiInput-underline:after': {
       borderBottomColor: theme.palette.neon_green,
     },
@@ -61,9 +62,12 @@ const useStyles = makeStyles(theme => ({
   labelRoot: {
     color: "black",
     "&$labelFocused": {
+      margin:0,
       fontWeight: 'bold',
       color: theme.palette.neon_green,
-      position: 'relative',
+      position: 'absolute',
+      top:'-0.5em',
+
     },
     
   },
