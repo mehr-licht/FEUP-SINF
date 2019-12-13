@@ -9,6 +9,7 @@ import './App.css';
 import MachipTable from "./components/MachipTable";
 import MachipCard from "./components/MachipCard";
 import MachipGoodsReceipt from "./components/MachipGoodsReceipt";
+import {tokenApiRequest} from "./api/tokenApiRequest";
 
 function App() {
   tokenApiRequest();

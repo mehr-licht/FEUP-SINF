@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Table } from 'react-bootstrap'
 import MachipTableHeaders from "./MachipTableHeaders"
 import MachipTableRow from "./MachipTableRow"
-import MyFetch from "./MyFetch";
+import { purchaseApiRequest } from "../api/purchaseApiRequest";
 
 const ReplaceTextFunction = (txt) => {
     txt = txt.toString().replace("_", " ");
@@ -42,14 +42,8 @@ class MachipTable extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.endpoint);
-        MyFetch(`${this.props.endpoint}`,
-            (info) => {
-                this.setState({ info });
-            },
-            (err) => {
-                console.log("Erro: "+ err);
-        });
+        purchaseApiRequest();
+
     }
 
     render() {
