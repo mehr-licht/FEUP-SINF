@@ -2,56 +2,74 @@ import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
+import { Col, Row, Container } from "reactstrap";
+
 
 import Layout from '../components/common/Layout'
 
 const useStyles = makeStyles(theme => ({
     root: {
-      flexGrow: 1,
-      paddingLeft: '20px',
-      paddingTop: '10px',
+        flexGrow: 1,
     },
     card: {
-      padding: theme.spacing(1),
-      textAlign: "center",
-      color: theme.palette.white,
-      backgroundColor: theme.palette.gray,
-      height: '40vh',
+        textAlign: "center",
+        paddingTop: '1vh',
+        color: theme.palette.white,
+        backgroundColor: theme.palette.gray,
+        height: '40vh',
+    },
+    column: {
+        padding: 0,
+        paddingBottom: '2vh',
+        paddingLeft: '1vh',
+        paddingRight: '1vh',
+    },
+    title: {
+        color: theme.palette.neon_green,
+        fontWeight: "bold",
     }
-  }));
+}));
 
 const Dashboard = () => {
     const classes = useStyles();
 
-    function FormRow() {
+    // function FormRow() {
+    //     return (
+    //         <React.Fragment>
+    //             <Grid item xs>
+    //                 <Card className={classes.card}>
+    //                     <h2>Sales</h2>
+    //                 </Card>
+    //             </Grid>
+    //             <Grid item xs>
+    //                 <Card className={classes.card}>
+    //                     <h2>Orders</h2>
+    //                 </Card>
+    //             </Grid>
+    //         </React.Fragment>
+    //     );
+    // }
+    function FormCol(props) {
         return (
-        <React.Fragment>
-            <Grid item xs>
+            <Col className={classes.column} xs="6">
                 <Card className={classes.card}>
-                    <h2>Sales</h2>
+                    <h2 className={classes.title}>{props.title}</h2>
                 </Card>
-            </Grid>
-            <Grid item xs>
-                <Card className={classes.card}>
-                    <h2>Orders</h2>
-                </Card>
-            </Grid>
-        </React.Fragment>
+            </Col>
         );
     }
 
     return (
-        <Layout >
-            <div className={classes.root}>
-                <Grid container spacing={6}>
-                    <Grid container item xs={12} spacing={4} >
-                        <FormRow />
-                    </Grid>
-                    <Grid container item xs={12} spacing={4}>
-                        <FormRow />
-                    </Grid>
-                </Grid>
-            </div>
+        <Layout>
+            <Container fluid="true">
+                <Row>
+                    <FormCol title = "SALES"/>
+                    <FormCol title = "ORDERS"/>
+                    <FormCol title = "INWARD"/>
+                    <FormCol title = "OUTWARD"/>
+                    
+                </Row>
+            </Container>
         </Layout>
     );
 }
