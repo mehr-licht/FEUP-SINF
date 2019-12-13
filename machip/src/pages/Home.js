@@ -9,9 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import MemoryIcon from '@material-ui/icons/Memory';
-import { Card } from '@material-ui/core';
-
-
+import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -22,7 +20,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center'
   },
-
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -30,7 +27,6 @@ const useStyles = makeStyles(theme => ({
     padding: '2em',
     backgroundColor: theme.palette.gray
   },
-
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.green
@@ -58,7 +54,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.light_gray,
     color: theme.palette.black,
   },
-
   labelRoot: {
     color: "black",
     "&$labelFocused": {
@@ -69,10 +64,7 @@ const useStyles = makeStyles(theme => ({
       top:'-0.5em',
 
     },
-    
   },
-  labelFocused: {
-  }
 }));
 
 const Home = () => {
@@ -135,7 +127,7 @@ const Home = () => {
             onClick={() => { navigate('/dashboard') }}
           >
             Login
-                </Button>
+          </Button>
         </Card>
       </Container>
     </div>
