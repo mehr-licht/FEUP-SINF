@@ -3,9 +3,12 @@ const axios = require("axios");
 
 export const purchaseApiRequest = async () => {
   const tokenValue = sessionStorage.getItem("token");
-  await axios(API_ACCESS_ROUTES.purchases, { headers: { token: tokenValue } })
+  return await axios(API_ACCESS_ROUTES.purchases, {
+    headers: { token: tokenValue }
+  })
     .then(response => {
-      console.log("Response", response);
+      //console.log("Response", response.data);
+      return response.data;
     })
     .catch(error => {
       throw new Error(error);

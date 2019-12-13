@@ -11,6 +11,8 @@ const purchasesRouter = require("./routes/purchases");
 const warehousesRouter = require("./routes/warehouses");
 const warehouseItemsRouter = require("./routes/warehouseItems");
 const deliveryTermsRouter = require("./routes/deliveryTerms");
+const itemDescriptionRouter = require("./routes/item_description");
+const goodsReceiptRouter = require("./routes/goods_receipt");
 
 app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,6 +26,8 @@ app.use("/api/purchase_orders", purchasesRouter);
 app.use("/api/sales_order", salesRouter);
 app.use("/api/warehouse_items", warehouseItemsRouter);
 app.use("/api/warehouses", warehousesRouter);
+app.use("/api/item_description", itemDescriptionRouter);
+app.use("/api/goods_receipt", goodsReceiptRouter);
 
 const PORT = 3001;
 
