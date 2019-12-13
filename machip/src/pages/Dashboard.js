@@ -1,10 +1,7 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
 import { Col, Row, Container } from "reactstrap";
-
-
 import Layout from '../components/common/Layout'
 
 const useStyles = makeStyles(theme => ({
@@ -33,22 +30,6 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
     const classes = useStyles();
 
-    // function FormRow() {
-    //     return (
-    //         <React.Fragment>
-    //             <Grid item xs>
-    //                 <Card className={classes.card}>
-    //                     <h2>Sales</h2>
-    //                 </Card>
-    //             </Grid>
-    //             <Grid item xs>
-    //                 <Card className={classes.card}>
-    //                     <h2>Orders</h2>
-    //                 </Card>
-    //             </Grid>
-    //         </React.Fragment>
-    //     );
-    // }
     function FormCol(props) {
         return (
             <Col className={classes.column} xs="6">
@@ -61,13 +42,12 @@ const Dashboard = () => {
 
     return (
         <Layout>
-            <Container fluid="true">
+            <Container fluid>
                 <Row>
                     <FormCol title = "SALES"/>
                     <FormCol title = "ORDERS"/>
                     <FormCol title = "INWARD"/>
                     <FormCol title = "OUTWARD"/>
-                    
                 </Row>
             </Container>
         </Layout>
