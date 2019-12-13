@@ -3,10 +3,11 @@ const router = express.Router();
 const axios = require("axios");
 
 router.get("/", async (req, res) => {
+  const { token } = req.headers;
   axios
     .get(
       "https://my.jasminsoftware.com/api/224895/224895-0001/sales/orders/54ee6d22-07f0-e911-b862-0003ff242cc8",
-      { headers: { Authorization: this.token } }
+      { headers: { Authorization: token } }
     )
     .then(response => {
       console.log("Response", response.data);
