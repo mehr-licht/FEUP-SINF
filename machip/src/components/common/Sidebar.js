@@ -6,10 +6,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import LocalShippingIcon from '@material-ui/icons/LocalShipping';
-import PeopleIcon from '@material-ui/icons/People';
+import Overview from '@material-ui/icons/Assignment';
+import Sales from '@material-ui/icons/Dashboard';
+import Orders from '@material-ui/icons/LocalShipping';
+import Picking from '@material-ui/icons/People';
+import { navigate } from '@reach/router';
 
 const drawerWidth = 240;
 
@@ -40,24 +41,39 @@ const Sidebar = () => {
 
     const classes = useStyles();
 
+    function NavigateItem(props) {
+        return (
+            <ListItem button key={props.text} onClick={() => { navigate('/' + props.site) }}>
+                <ListItemIcon>
+                    {(() => {
+                        switch (props.text) {
+                            case "Overview": return <Overview htmlColor="white" />;
+                            case "Sales": return <Sales htmlColor="white" />;
+                            case "Orders": return <Orders htmlColor="white" />;
+                            case "Picking": return <Picking htmlColor="white" />;
+                        }
+                    })()}
+                </ListItemIcon>
+                <ListItemText primary={props.text} />
+            </ListItem>
+        );
+    }
 
     return (
         <Drawer
             className={classes.drawer}
             variant="permanent"
             classes={{
-            paper: classes.drawerPaper,
+                paper: classes.drawerPaper,
             }}
             anchor="left"
         >
             <div className={classes.toolbar} />
             <List>
-                {['Overview', 'Sales', 'Orders', 'Picking'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? (index - 2 === 0 ? <AssignmentIcon htmlColor="white"/> : <DashboardIcon htmlColor="white"/>) : (index - 3 === 0 ? <LocalShippingIcon htmlColor="white"/> : <PeopleIcon htmlColor="white"/>)}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                <NavigateItem text='Overview' site="dashboard" />
+                <NavigateItem text='Sales' site="sales_orders" />
+                <NavigateItem text='Orders' site="purchase_orders" />
+                <NavigateItem text='Picking' site="picking_orders" />
             </List>
             <Divider />
         </Drawer>
