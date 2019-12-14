@@ -66,6 +66,8 @@ const useStyles = makeStyles(theme => ({
       top: '-0.5em',
     },
   },
+  labelFocused: {
+  }
 }));
 
 const theme = createMuiTheme({
