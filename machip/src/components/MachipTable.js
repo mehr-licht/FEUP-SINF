@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button  } from "react-bootstrap";
 import MachipTableHeaders from "./MachipTableHeaders";
 import MachipTableRow from "./MachipTableRow";
 import { purchaseApiRequest } from "../api/purchaseApiRequest";
@@ -16,17 +16,31 @@ const ReplaceTextFunction = txt => {
   return txt.join(" ");
 };
 
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 function removeDup(info) {
   var seriesNumbers = [];
   var final_info = [];
+  var aux = 0;
   if (info.length) {
     info.forEach(element => {
       if (!seriesNumbers.includes(element.seriesNumber)) {
         if (element.documentStatus === 1 && element.isDeleted === false) {
-          seriesNumbers.push(element.seriesNumber);
-          final_info.push(element);
+          for (let i = 0; i < element.documentLines.length; i++) {
+            if (element.documentLines[i].quantity === element.documentLines[i].receivedQuantity) {
+              aux += 1;
+            }
+          }
+          if (aux !== element.documentLines.length) {
+            seriesNumbers.push(element.seriesNumber);
+            final_info.push(element);
+          }
         }
       }
+      aux = 0;
     });
   } else {
     console.log("no items found");
@@ -43,7 +57,8 @@ class MachipTable extends Component {
       info: []
     };
   }
-  
+
+
   onChange() {
     console.log(pickedItems);
     for (let index = 0; index < pickedItems.length; index++) {
@@ -55,6 +70,9 @@ class MachipTable extends Component {
           console.log("error");
         });   
     }
+    sleep(3000).then(() => {
+      window.location.reload();
+    })
   }
 
   componentDidMount() {
@@ -118,9 +136,9 @@ class MachipTable extends Component {
             ))}
           </tbody>
         </Table>
-        <button onClick={this.onChange}>
-          Activate Lasers
-        </button>
+        <Button onClick={this.onChange}>
+          Send Products
+        </Button >
       </div>
     );
   }

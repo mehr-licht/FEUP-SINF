@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const qs = require("qs");
 
 router.get("/", async (req, res) => {
   const { token } = req.headers;
