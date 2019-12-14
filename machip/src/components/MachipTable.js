@@ -3,6 +3,9 @@ import { Table } from "react-bootstrap";
 import MachipTableHeaders from "./MachipTableHeaders";
 import MachipTableRow from "./MachipTableRow";
 import { purchaseApiRequest } from "../api/purchaseApiRequest";
+import { salesApiRequest } from "../api/salesApiRequest";
+import {pickedItems} from "./MachipTableRow";
+import { goodsApiRequest } from "../api/goodsApiRequest";
 
 const ReplaceTextFunction = txt => {
   txt = txt.toString().replace("_", " ");
@@ -31,6 +34,7 @@ function removeDup(info) {
   return final_info;
 }
 
+
 class MachipTable extends Component {
   constructor(props) {
     super(props);
@@ -39,16 +43,40 @@ class MachipTable extends Component {
       info: []
     };
   }
+  
+  onChange() {
+    console.log(pickedItems);
+    for (let index = 0; index < pickedItems.length; index++) {
+      goodsApiRequest([pickedItems[index][0], pickedItems[index][1]])
+        .then(data => {
+          console.log(data);
+        })
+        .catch(() => {
+          console.log("error");
+        });   
+    }
+  }
 
   componentDidMount() {
     console.log("Component Did Mount");
-    purchaseApiRequest()
-      .then(data => {
-        this.setState({ info: data });
-      })
-      .catch(() => {
-        this.setState({ info: [] });
-      });
+    if (this.props.endpoint === "purchase_orders") {
+      purchaseApiRequest()
+        .then(data => {
+          this.setState({ info: data });
+        })
+        .catch(() => {
+          this.setState({ info: [] });
+        });      
+    }
+    else {
+      salesApiRequest()
+        .then(data => {
+          this.setState({ info: data });
+        })
+        .catch(() => {
+          this.setState({ info: [] });
+        });   
+    }
   }
 
   /* shouldComponentUpdate(nextProps, nextState) {
@@ -90,6 +118,9 @@ class MachipTable extends Component {
             ))}
           </tbody>
         </Table>
+        <button onClick={this.onChange}>
+          Activate Lasers
+        </button>
       </div>
     );
   }

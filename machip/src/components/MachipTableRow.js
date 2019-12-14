@@ -1,5 +1,6 @@
 import React from "react";
 import { Checkbox } from 'antd';
+
 const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
     return `${date.toLocaleDateString()},
@@ -21,15 +22,15 @@ class MachipTableRow extends React.Component{
     
     onChange(e) {
         if (e.target.checked) {
-            pickedItems.push(e.target.value);
+            pickedItems.push([e.target.value,e.target.value2]);
         }
         else{
             const removeIndex = pickedItems.map(function(elem) {
-                return elem.id;
-            }).indexOf(e.target.value.id);
+                return elem;
+            }).indexOf(e.target.value);
             pickedItems.splice(removeIndex, 1);
         }
-        console.log(e.target.value);
+        console.log(pickedItems);
     }
 
 
@@ -88,3 +89,4 @@ class MachipTableRow extends React.Component{
 }
 
 export default MachipTableRow;
+export {pickedItems};
