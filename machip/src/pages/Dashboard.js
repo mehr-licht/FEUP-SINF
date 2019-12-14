@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
         height: '40vh',
     },
     column: {
-        padding: 0,
         paddingBottom: '2vh',
         paddingLeft: '1vh',
         paddingRight: '1vh',
