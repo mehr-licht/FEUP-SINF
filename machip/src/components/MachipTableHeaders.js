@@ -15,7 +15,8 @@ const MachipTableHeaders = {
             "company",
             "Gross Value",
             "Status",
-            "Date"
+            "Date",
+            "",
         ],
     purchase_orders:
         [
@@ -29,9 +30,20 @@ const MachipTableHeaders = {
         [
             "id",
             "company",
-            "Gross Value",
-            "Status",
-            "Date",
+            "description",
+            "quantity",
+            "original quantity",
+            "open quantity",
+        ],
+    warehouses:
+        [
+            "id",
+            "description",
+        ],
+    warehouse_items:
+        [
+            "description",
+            "stock",
         ],
  };
 

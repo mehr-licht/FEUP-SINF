@@ -1,4 +1,5 @@
 function MyFetch(endpoint, callback, errorcallback) {
+    console.log(endpoint);
     fetch('/token', {
         headers: {
             'Content-Type': 'application/json',
@@ -6,7 +7,7 @@ function MyFetch(endpoint, callback, errorcallback) {
         }
 
     })
-    console.log(endpoint);
+   
     fetch(`/${endpoint}`, {
         headers: {
             'Content-Type': 'application/json',
@@ -16,6 +17,7 @@ function MyFetch(endpoint, callback, errorcallback) {
     }).then(res => res.json())
         .then(endpoint => {
             if (callback !== null) {
+                console.log(endpoint);
                 callback(endpoint);
             }
         })

@@ -8,7 +8,7 @@ import {Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
 import MachipTable from "./components/MachipTable";
 import MachipCard from "./components/MachipCard";
-import MachipGoodsReceipt from "./components/MachipGoodsReceipt";
+// import MachipGoodsReceipt from "./components/MachipGoodsReceipt";
 
 function App() {
   return (
@@ -39,9 +39,9 @@ function App() {
       </Navbar>
       <Router>
       <Switch>  
-        <Route exact path="/DeliveryTerms">
+        {/* <Route exact path="/DeliveryTerms">
           <MachipTable endpoint="delivery_terms"/>
-        </Route>
+        </Route> */}
           {/* <Route exact path="/DeliveryTerms/:id" render={(props) => <MachipCard {...props} endpoint={"delivery_terms"} />} /> */}
           <Route exact path="/SalesOrders/:id" render={(props) => <MachipCard {...props} endpoint={"sales_orders"} />} />
           <Route exact path="/PurchaseOrders/:id" render={(props) => <MachipCard {...props} endpoint={"purchase_orders"} />} />
@@ -52,16 +52,16 @@ function App() {
         <Route path="/PurchaseOrders">
           <MachipTable endpoint="purchase_orders" />  
         </Route>
-          <Route path="/GoodsReceipt/:page/:size" render={(props) => <MachipGoodsReceipt {...props} endpoint={"goods_receipt"} />} />
+          {/* <Route path="/GoodsReceipt/:page/:size" render={(props) => <MachipGoodsReceipt {...props} endpoint={"goods_receipt"} />} /> */}
             {/* <MachipTable endpoint="goods_receipt/1/10?company='FEUP-AI'" /> */}
             {/* <MachipTable endpoint="goods_receipt/:page/:size" /> */}
      
-          {/* <Route path="/Warehouses">
-            <Warehouses />
-          </Route> */}
-          {/* <Route path="/WarehousesItems">
-            <WarehousesItems />
-          </Route> */}
+          <Route path="/Warehouses">
+            <MachipTable endpoint="warehouses" />
+          </Route> 
+          <Route path="/WarehousesItems">
+            <MachipTable endpoint="warehouse_items" warehouse="01"/> {/* TODO */}
+          </Route>
         </Switch>
       </Router>
     </div>
