@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   const { token } = req.headers;
+  const { id } = req.headers;
   axios
     .get(
       "https://my.jasminsoftware.com/api/224895/224895-0001/materialscore/materialsitems/" +
-        req.params.id +
-        "/extension",
+        id + "/extension",
       { headers: { Authorization: token } }
     )
     .then(response => {

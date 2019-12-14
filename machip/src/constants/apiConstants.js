@@ -7,5 +7,7 @@ export const API_ACCESS_ROUTES = {
   deliveryTerms: `${BASE_API}/delivery_terms/`,
   warehouseItems: `${BASE_API}/warehouse_items/`,
   goodsReceipt: `${BASE_API}/goods_receipt/`,
-  warehouses: `${BASE_API}/warehouses/`
+  itemDescription: `${BASE_API}/item_description/`,
+  warehouses: `${BASE_API}/warehouses/`,
+  transferOrders: `${BASE_API}/transfer_order/`
 };

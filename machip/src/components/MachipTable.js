@@ -21,29 +21,44 @@ const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-function removeDup(info) {
+function removeDup(info, endpoint) {
   var seriesNumbers = [];
   var final_info = [];
   var aux = 0;
-  if (info.length) {
-    info.forEach(element => {
-      if (!seriesNumbers.includes(element.seriesNumber)) {
-        if (element.documentStatus === 1 && element.isDeleted === false) {
-          for (let i = 0; i < element.documentLines.length; i++) {
-            if (element.documentLines[i].quantity === element.documentLines[i].receivedQuantity) {
-              aux += 1;
+  if (endpoint === "purchase_orders") {
+    if (info.length) {
+      info.forEach(element => {
+        if (!seriesNumbers.includes(element.seriesNumber)) {
+          if (element.documentStatus === 1 && element.isDeleted === false) {
+            for (let i = 0; i < element.documentLines.length; i++) {
+              if (element.documentLines[i].quantity === element.documentLines[i].receivedQuantity) {
+                aux += 1;
+              }
+            }
+            if (aux !== element.documentLines.length) {
+              seriesNumbers.push(element.seriesNumber);
+              final_info.push(element);
             }
           }
-          if (aux !== element.documentLines.length) {
-            seriesNumbers.push(element.seriesNumber);
-            final_info.push(element);
-          }
         }
-      }
-      aux = 0;
-    });
-  } else {
-    console.log("no items found");
+        aux = 0;
+      });
+    } else {
+      console.log("no items found");
+    }    
+  }
+  else{
+    if (info.length) {
+      info.forEach(element => {
+        if (!seriesNumbers.includes(element.seriesNumber)) {
+          seriesNumbers.push(element.seriesNumber);
+          final_info.push(element);
+        }
+        aux = 0;
+      });
+    } else {
+      console.log("no items found");
+    }    
   }
   return final_info;
 }
@@ -76,8 +91,8 @@ class MachipTable extends Component {
   }
 
   componentDidMount() {
-    console.log("Component Did Mount");
     if (this.props.endpoint === "purchase_orders") {
+      console.log("Component Did Mount");
       purchaseApiRequest()
         .then(data => {
           this.setState({ info: data });
@@ -87,6 +102,7 @@ class MachipTable extends Component {
         });      
     }
     else {
+      console.log("Component Did Mount Sales");
       salesApiRequest()
         .then(data => {
           this.setState({ info: data });
@@ -115,7 +131,7 @@ class MachipTable extends Component {
     const { endpoint } = this.props;
     const tableHeaders = MachipTableHeaders[`${endpoint}`];
     console.log("Info", info);
-    var info_final = removeDup(info);
+    var info_final = removeDup(info, this.props.endpoint);
     info_final.sort((a, b) => a.seriesNumber - b.seriesNumber);
     console.log(info_final);
     return (

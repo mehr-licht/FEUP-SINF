@@ -1,10 +1,10 @@
 import { API_ACCESS_ROUTES } from "../constants/apiConstants";
 const axios = require("axios");
 
-export const salesApiRequest = async () => {
+export const itemDescriptionApiRequest = async (item) => {
   const tokenValue = sessionStorage.getItem("token");
-  return await axios(API_ACCESS_ROUTES.sales, {
-    headers: { token: tokenValue }
+  return await axios(API_ACCESS_ROUTES.itemDescription, {
+    headers: { token: tokenValue, id: item.itemKey}
   })
     .then(response => {
       console.log("Response", response);
