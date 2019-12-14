@@ -1,19 +1,19 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { tokenApiRequest } from "./api/tokenApiRequest";
-import { Navbar } from "react-bootstrap";
-import "./App.css";
+import React from 'react';
+import { ThemeProvider } from '@material-ui/styles';
+import { Router } from '@reach/router';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
+import theme from './theme';
 
-function App() {
-  tokenApiRequest();
-  return (
-    <div className="App">
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">React Bootstrap</Navbar.Brand>
-      </Navbar>
-    </div>
-  );
+const App = () => {
+    return (
+      <ThemeProvider theme={theme}>
+          <Router>
+            <Home path="/" />
+            <Dashboard path="/dashboard" />
+          </Router>
+      </ThemeProvider>
+    );
 }
 
 export default App;
