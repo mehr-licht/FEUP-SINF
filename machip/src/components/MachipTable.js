@@ -113,19 +113,6 @@ class MachipTable extends Component {
     }
   }
 
-  /* shouldComponentUpdate(nextProps, nextState) {
-    console.log("Should Component Update");
-    if (this.state.info !== nextState.info) {
-      return true;
-    }
-    return false;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("This state", this.state.info);
-    console.log("Prev State", prevState.info);
-  } */
-
   render() {
     const { info } = this.state;
     const { endpoint } = this.props;
