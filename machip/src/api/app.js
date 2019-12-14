@@ -188,6 +188,60 @@ app.get("/item_description/:id", async (req, res) => {
         });
 });
 
+app.get("/from_to/:from/:to/:salesItem/:qty", async (req, res) => {
+    axios
+        .post("https://my.jasminsoftware.com/api/224895/224895-0001/materialsmanagement/stockTransferOrders", {
+            headers: { Authorization: this.token },
+            body: {
+                "company": "FEUP-AI",
+                "sourceWarehouse": req.params.from,
+                "targetWarehouse": req.params.to,
+                "UnloadingCountry": "PT",
+                "loadingBuildingNumber": "01",
+                "documentLines": [
+                    {
+                        "materialsItem": req.params.salesItem,
+                        "quantity": req.params.qty,
+                    }
+                ]
+            }
+        })
+        .then(response => {
+            console.log("Response", response.data);
+            return res.send(response.data);
+        })
+        .catch(error => {
+            console.log("Error", error);
+            return res.send({ message: error });
+        });
+});
+
+// body:[
+//     {
+//         "quantity": 1,
+//         "sourceDocKey": "ECL.2017.7",
+//         "sourceDocLineNumber": 1
+//     },
+//     {
+//         "quantity": 1,
+//         "sourceDocKey": "ECL.2017.7",
+//         "sourceDocLineNumber": 2
+//     }
+// ]
+app.get("/generate_delivery", async (req, res) => { //TODO Falta o body
+    axios
+        .post("https://my.jasminsoftware.com/api/224895/224895-0001/shipping/processOrders/FEUP-AI", {
+            headers: { Authorization: this.token },
+        })
+        .then(response => {
+            console.log("Response", response.data);
+            return res.send(response.data);
+        })
+        .catch(error => {
+            console.log("Error", error);
+            return res.send({ message: error });
+        });
+});
 
 app.get("/goods_receipt/:page/:size", async (req, res) => {
     console.log(req.params);
