@@ -15,10 +15,14 @@ const styles = theme => ({
     paddingBottom: 25
   },
   tableHead: {
-    color: theme.palette.green
+    color: theme.palette.green,
+    backgroundColor: theme.palette.gray,
+    fontWeight: 'bold',
+    fontSize: '1.5em'
   },
   tableBody: {
-    color: theme.palette.white
+    color: theme.palette.white,
+    backgroundColor: theme.palette.gray
   },
   sendButton: {
     color: theme.palette.black,
@@ -149,7 +153,7 @@ class MachipTable extends Component {
       <div>
         <h2 className={classes.tableLabel}> {ReplaceTextFunction(`${endpoint}`)}</h2>
 
-        <Table striped bordered hover responsive="sm">
+        <Table dark striped bordered hover responsive="sm">
           <thead className={classes.tableHead}>
             <tr>
               {tableHeaders.map(header => (
