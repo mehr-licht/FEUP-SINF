@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import { Col, Row, Container } from "reactstrap";
 import Layout from '../components/common/Layout'
+import MachipTable from '../components/MachipTable'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,7 +24,15 @@ const useStyles = makeStyles(theme => ({
     title: {
         color: theme.palette.neon_green,
         fontWeight: "bold",
-    }
+    },
+    tableCard: {
+        padding: 5,
+        backgroundColor: theme.palette.gray,
+        color: theme.palette.neon_green,
+        textAlign: "center",
+        maxHeight: '100%',
+        overflow: 'auto'
+    },
 }));
 
 const Dashboard = () => {
@@ -33,7 +42,7 @@ const Dashboard = () => {
         return (
             <Col className={classes.column} xs="6">
                 <Card className={classes.card}>
-                    <h2 className={classes.title}>{props.title}</h2>
+                    {props.table}
                 </Card>
             </Col>
         );
@@ -43,7 +52,11 @@ const Dashboard = () => {
         <Layout>
             <Container fluid>
                 <Row>
-                    <FormCol title = "SALES"/>
+                    <FormCol table={
+                        <Card className={classes.tableCard} raised>
+                            <MachipTable endpoint="sales_orders" />
+                        </Card>
+                    }/>
                     <FormCol title = "ORDERS"/>
                     <FormCol title = "INWARD"/>
                     <FormCol title = "OUTWARD"/>
