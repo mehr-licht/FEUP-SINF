@@ -1,11 +1,34 @@
 import React, { Component } from "react";
-import { Table, Button  } from "react-bootstrap";
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/styles';
+import Button from '@material-ui/core/Button';
+import { Table } from "reactstrap";
 import MachipTableHeaders from "./MachipTableHeaders";
 import MachipTableRow from "./MachipTableRow";
 import { purchaseApiRequest } from "../api/purchaseApiRequest";
 import { salesApiRequest } from "../api/salesApiRequest";
 import {pickedItems} from "./MachipTableRow";
 import { goodsApiRequest } from "../api/goodsApiRequest";
+
+const styles = theme => ({
+  tableLabel: {
+    paddingBottom: 25
+  },
+  tableHead: {
+    color: theme.palette.green
+  },
+  tableBody: {
+    color: theme.palette.white
+  },
+  sendButton: {
+    color: theme.palette.black,
+    backgroundColor: theme.palette.neon_green,
+    '&:hover': {
+      backgroundColor: theme.palette.green,
+      color: theme.palette.black
+    }
+  }
+});
 
 const ReplaceTextFunction = txt => {
   txt = txt.toString().replace("_", " ");
@@ -114,6 +137,7 @@ class MachipTable extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     const { info } = this.state;
     const { endpoint } = this.props;
     const tableHeaders = MachipTableHeaders[`${endpoint}`];
@@ -123,23 +147,23 @@ class MachipTable extends Component {
     console.log(info_final);
     return (
       <div>
-        <h2> {ReplaceTextFunction(`${endpoint}`)}</h2>
+        <h2 className={classes.tableLabel}> {ReplaceTextFunction(`${endpoint}`)}</h2>
 
         <Table striped bordered hover responsive="sm">
-          <thead>
+          <thead className={classes.tableHead}>
             <tr>
               {tableHeaders.map(header => (
                 <th key={header}>{header}</th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className={classes.tableBody}>
             {info_final.map((item, i) => (
               <MachipTableRow key={i} item={item} />
             ))}
           </tbody>
         </Table>
-        <Button onClick={this.onChange}>
+        <Button className={classes.sendButton} variant="contained" onClick={this.onChange}>
           Send Products
         </Button >
       </div>
@@ -147,4 +171,8 @@ class MachipTable extends Component {
   }
 }
 
-export default MachipTable;
+MachipTable.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(MachipTable);
