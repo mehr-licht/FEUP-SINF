@@ -10,6 +10,7 @@ import { salesApiRequest } from "../api/salesApiRequest";
 import {pickedItems} from "./MachipTableRow";
 import { goodsApiRequest } from "../api/goodsApiRequest";
 import { itemDescriptionApiRequest } from "../api/itemDescriptionApiRequest";
+import { transferOrdersApiRequest } from "../api/transferOrdersApiRequest";
 
 const styles = theme => ({
   tableLabel: {
@@ -89,7 +90,6 @@ function removeDup(info, endpoint) {
     }    
   }
   else {
-    console.log("hi");
     final_info = info;
   }
   return final_info;
@@ -105,19 +105,37 @@ class MachipTable extends Component {
     };
   }
 
-
-  onChange() {
-    console.log(pickedItems);
-    for (let index = 0; index < pickedItems.length; index++) {
-      goodsApiRequest([pickedItems[index][0], pickedItems[index][1]])
-        .then(data => {
-          console.log(data);
-        })
-        .catch(() => {
-          console.log("error");
-        });   
+  
+  onChange(endpoint, info) {
+    if (endpoint === "purchase_orders") {
+      console.log(endpoint)
+      console.log(pickedItems);
+      for (let i = 0; i < pickedItems.length; i++) {
+        goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
+          .then(data => {
+            console.log(data);
+          })
+          .catch(() => {
+            console.log("error");
+          });   
+      }
     }
-    
+    else if(endpoint === "inward"){
+      console.log(info)
+      for (let i = 0; i < info.length; i++) {
+        transferOrdersApiRequest(info[i])
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.log("error", error);
+          });   
+      }
+    }
+
+    sleep(3000).then(() => {
+      window.location.reload();
+    })
   }
 
   componentDidMount() {
@@ -149,8 +167,17 @@ class MachipTable extends Component {
           item.materialsItemWarehouses.forEach(warehouses => {
             if (this.props.endpoint === "inward") {
               if (warehouses.warehouse === '01' && warehouses.stockBalance > 0) {
-                console.log(item.itemKey + ", " + warehouses.stockBalance);
-                tempInfo.push([item.itemKey, warehouses.stockBalance])
+                item.materialsItemWarehouses.forEach(destination =>{
+                  if (destination.warehouse !== '01' && destination.warehouse !== '02') {
+                    if (item.itemKey === "RYZEN93950X" && destination.warehouse === 'A00') {
+                      console.log("po crlho")
+                    }
+                    else{
+                      console.log(item.itemKey + ", " + warehouses.stockBalance + '-->' + destination.warehouse);
+                      tempInfo.push([item.itemKey, warehouses.stockBalance, destination.warehouse])
+                    }
+                  }
+                })
               }
             }
             else{
@@ -196,7 +223,7 @@ class MachipTable extends Component {
             ))}
           </tbody>
         </Table>
-        <Button className={classes.sendButton} variant="contained" onClick={this.onChange}>
+        <Button className={classes.sendButton} variant="contained" onClick={() => this.onChange(endpoint, info)}>
           Send Products
         </Button >
       </div>

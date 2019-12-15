@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
   const { targetwarehouse } = req.headers;
   const { materialsitem } = req.headers;
   const { quantity } = req.headers;
+  console.log(company + ", " + sourcewarehouse + ", " + targetwarehouse + ", " + materialsitem + ", " + quantity)
   let config = {
     headers: {
       'Authorization': token,

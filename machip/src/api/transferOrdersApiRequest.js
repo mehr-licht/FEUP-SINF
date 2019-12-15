@@ -3,13 +3,22 @@ const axios = require("axios");
 
 export const transferOrdersApiRequest = async (item) => {
   const tokenValue = sessionStorage.getItem("token");
-  //const company = req.headers;
-  //const sourcewarehouse = req.headers;
-  //const targetwarehouse = req.headers;
-  //const materialsitem = req.headers;
-  //const quantity = req.headers;
+  console.log(item);
+  const company = "FEUP-AI";
+  const sourcewarehouse = "01";
+  const targetwarehouse = item[2];
+  const materialsitem = item[0];
+  const quantity = item[1];
+
   return await axios(API_ACCESS_ROUTES.transferOrders, {
-    headers: { token: tokenValue }
+    headers: { 
+      token: tokenValue, 
+      company: company, 
+      sourcewarehouse: sourcewarehouse, 
+      targetwarehouse: targetwarehouse, 
+      materialsitem: materialsitem,
+      quantity: quantity
+    }
   })
     .then(response => {
       //console.log("Response", response.data);
