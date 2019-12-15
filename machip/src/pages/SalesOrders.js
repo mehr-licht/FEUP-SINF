@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
+import Card from '@material-ui/core/Card';
 import Layout from '../components/common/Layout'
 import MachipTable from '../components/MachipTable'
-import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles(theme => ({
     tableCard: {
@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
     const classes = useStyles();
-
     return (
         <Layout>
             <Card className={classes.tableCard} raised>
