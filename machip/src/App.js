@@ -5,8 +5,10 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import SalesOrders from './pages/SalesOrders';
 import PurchaseOrders from './pages/PurchaseOrders';
+import InwardWarehouse from './pages/InwardWarehouse';
 import theme from './theme';
 import {tokenApiRequest} from "./api/tokenApiRequest";
+import OutwardWarehouse from './pages/OutwardWarehouse';
 
 const App = () => {
   tokenApiRequest();
@@ -17,6 +19,8 @@ const App = () => {
           <Dashboard path="/dashboard" />
           <SalesOrders path="/sales_orders" />
           <PurchaseOrders path="/purchase_orders" />
+          <InwardWarehouse path="/inward" />
+          <OutwardWarehouse path="/outward"/>
         </Router>
     </ThemeProvider>
   );

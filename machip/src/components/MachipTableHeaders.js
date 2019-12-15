@@ -33,6 +33,16 @@ const MachipTableHeaders = {
             "Status",
             "Date",
         ],
+    inward:
+        [
+            "Item",
+            "Quantity",
+        ],
+    outward:
+        [
+            "Item",
+            "Quantity",
+        ],
  };
 
 export default MachipTableHeaders;

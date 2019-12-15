@@ -4,7 +4,7 @@ const axios = require("axios");
 export const itemDescriptionApiRequest = async (item) => {
   const tokenValue = sessionStorage.getItem("token");
   return await axios(API_ACCESS_ROUTES.itemDescription, {
-    headers: { token: tokenValue, id: item.itemKey}
+    headers: { token: tokenValue }
   })
     .then(response => {
       console.log("Response", response);

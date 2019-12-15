@@ -9,6 +9,7 @@ import { purchaseApiRequest } from "../api/purchaseApiRequest";
 import { salesApiRequest } from "../api/salesApiRequest";
 import {pickedItems} from "./MachipTableRow";
 import { goodsApiRequest } from "../api/goodsApiRequest";
+import { itemDescriptionApiRequest } from "../api/itemDescriptionApiRequest";
 
 const styles = theme => ({
   tableLabel: {
@@ -74,7 +75,7 @@ function removeDup(info, endpoint) {
       console.log("no items found");
     }    
   }
-  else{
+  else if(endpoint === "sales_orders"){
     if (info.length) {
       info.forEach(element => {
         if (!seriesNumbers.includes(element.seriesNumber)) {
@@ -86,6 +87,10 @@ function removeDup(info, endpoint) {
     } else {
       console.log("no items found");
     }    
+  }
+  else {
+    console.log("hi");
+    final_info = info;
   }
   return final_info;
 }
@@ -112,9 +117,7 @@ class MachipTable extends Component {
           console.log("error");
         });   
     }
-    sleep(3000).then(() => {
-      window.location.reload();
-    })
+    
   }
 
   componentDidMount() {
@@ -128,7 +131,7 @@ class MachipTable extends Component {
           this.setState({ info: [] });
         });      
     }
-    else {
+    else if(this.props.endpoint === "sales_orders") {
       console.log("Component Did Mount Sales");
       salesApiRequest()
         .then(data => {
@@ -137,6 +140,32 @@ class MachipTable extends Component {
         .catch(() => {
           this.setState({ info: [] });
         });   
+    }
+    else{
+      var tempInfo=[];
+      itemDescriptionApiRequest()
+      .then(data => {
+        data.forEach(item => {
+          item.materialsItemWarehouses.forEach(warehouses => {
+            if (this.props.endpoint === "inward") {
+              if (warehouses.warehouse === '01' && warehouses.stockBalance > 0) {
+                console.log(item.itemKey + ", " + warehouses.stockBalance);
+                tempInfo.push([item.itemKey, warehouses.stockBalance])
+              }
+            }
+            else{
+              if (warehouses.warehouse === '02' && warehouses.stockBalance > 0) {
+                console.log(item.itemKey + ", " + warehouses.stockBalance);
+                tempInfo.push([item.itemKey, warehouses.stockBalance])
+              }
+            }
+          });
+        });
+        this.setState({info: tempInfo});
+      })
+      .catch(error => {
+        console.log("Error " + error)
+      });   
     }
   }
 
@@ -163,7 +192,7 @@ class MachipTable extends Component {
           </thead>
           <tbody className={classes.tableBody}>
             {info_final.map((item, i) => (
-              <MachipTableRow key={i} item={item} />
+              <MachipTableRow key={i} item={item} endpoint={endpoint}/>
             ))}
           </tbody>
         </Table>

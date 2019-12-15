@@ -7,8 +7,7 @@ router.get("/", async (req, res) => {
   const { id } = req.headers;
   axios
     .get(
-      "https://my.jasminsoftware.com/api/224895/224895-0001/materialscore/materialsitems/" +
-        id + "/extension",
+      "https://my.jasminsoftware.com/api/224895/224895-0001/materialscore/materialsitems/",
       { headers: { Authorization: token } }
     )
     .then(response => {

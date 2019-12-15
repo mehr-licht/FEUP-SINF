@@ -80,11 +80,25 @@ class MachipTableRow extends React.Component{
 
     render() {
         const { item } = this.props;
-        let allItemRows = [];  
-        const perItemRows = this.renderItem(item);
+        const { endpoint } = this.props;
+        if (endpoint === "inward" || endpoint === "outward") {
+            const itemRows = [];
+            console.log(item)
+            itemRows.push(
+                <tr key={item[0]}>
+                    <td>{item[0]}</td>
+                    <td>{item[1]}</td>
+                </tr>
+            );
+            return(itemRows);
+        }
+        else{
+            let allItemRows = [];  
+            const perItemRows = this.renderItem(item);
             return (
                 allItemRows = allItemRows.concat(perItemRows)
             )
+        }
     }
 }
 
