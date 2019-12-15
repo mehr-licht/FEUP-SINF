@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
       { headers: { Authorization: token } }
     )
     .then(response => {
-      console.log("Response", response.data);
+      
       return res.send(response.data);
     })
     .catch(error => {

@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
     .post(
       "https://my.jasminsoftware.com/api/224895/224895-0001/materialsmanagement/stockTransferOrders", data, config)
     .then(response => {
-      console.log("Response", response.data);
+      
       return res.send(response.data);
     })
     .catch(error => {

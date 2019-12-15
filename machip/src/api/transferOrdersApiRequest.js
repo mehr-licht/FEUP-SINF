@@ -21,7 +21,7 @@ export const transferOrdersApiRequest = async (item) => {
     }
   })
     .then(response => {
-      //console.log("Response", response.data);
+      //
       return response.data;
     })
     .catch(error => {

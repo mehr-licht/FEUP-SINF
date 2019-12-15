@@ -13,7 +13,7 @@ export const goodsApiRequest = async (item) => {
     headers: { token: tokenValue, itemIndex: itemIndex, itemQuantity: itemQuantity, naturalKey: naturalKey}
   })
     .then(response => {
-      //console.log("Response", response.data);
+      //
       return response.data;
     })
     .catch(error => {

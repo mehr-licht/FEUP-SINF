@@ -7,7 +7,7 @@ export const purchaseApiRequest = async () => {
     headers: { token: tokenValue }
   })
     .then(response => {
-      //console.log("Response", response.data);
+      //
       return response.data;
     })
     .catch(error => {

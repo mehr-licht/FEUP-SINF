@@ -120,6 +120,19 @@ class MachipTable extends Component {
           });   
       }
     }
+    if (endpoint === "sales_orders") {
+      console.log(endpoint)
+      console.log(pickedItems);
+      for (let i = 0; i < pickedItems.length; i++) {
+        // goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
+        //   .then(data => {
+        //     console.log(data);
+        //   })
+        //   .catch(() => {
+        //     console.log("error");
+        //   });   
+      }
+    }
     else if(endpoint === "inward"){
       console.log(info)
       for (let i = 0; i < info.length; i++) {
