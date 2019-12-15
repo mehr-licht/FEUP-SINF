@@ -14,10 +14,11 @@ const deliveryTermsRouter = require("./routes/deliveryTerms");
 const itemDescriptionRouter = require("./routes/item_description");
 const goodsReceiptRouter = require("./routes/goods_receipt");
 const transferOrderRouter = require("./routes/transfer_order");
+const salesOrdersRouter = require("./routes/sales_orders");
 
 app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({ type: "application/*+json" }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/api/", indexRouter);
@@ -30,6 +31,7 @@ app.use("/api/warehouses", warehousesRouter);
 app.use("/api/item_description", itemDescriptionRouter);
 app.use("/api/goods_receipt", goodsReceiptRouter);
 app.use("/api/transfer_order", transferOrderRouter);
+app.use("/api/sales_orders_picking", salesOrdersRouter);
 
 const PORT = 3001;
 
