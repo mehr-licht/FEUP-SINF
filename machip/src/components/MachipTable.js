@@ -318,7 +318,7 @@ class MachipTable extends Component {
     console.log(info_final);
     return (
       <div>
-        <h2 className={classes.tableLabel}> {ReplaceTextFunction(`${endpoint}`)}</h2>
+        <h4 className={classes.tableLabel}> {ReplaceTextFunction(`${endpoint}`)}</h4>
 
         <Table dark striped bordered hover responsive="sm">
           <thead className={classes.tableHead}>
@@ -329,9 +329,14 @@ class MachipTable extends Component {
             </tr>
           </thead>
           <tbody className={classes.tableBody}>
-            {info_final.map((item, i) => (
-              <MachipTableRow key={i} item={item} endpoint={endpoint}/>
-            ))}
+            {this.props.overview ? 
+              info_final.slice(0,5).map((item, i) => (
+                <MachipTableRow key={i} item={item} endpoint={endpoint}/>
+              ))
+              : info_final.map((item, i) => (
+                <MachipTableRow key={i} item={item} endpoint={endpoint}/>
+              ))
+            }
           </tbody>
         </Table>
         { this.props.overview ? 

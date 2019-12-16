@@ -27,7 +27,9 @@ const useStyles = makeStyles(theme => ({
         fontWeight: "bold",
     },
     tableCard: {
-        padding: 5,
+        paddingBottom: 25,
+        paddingLeft: 15,
+        paddingRight: 15,
         backgroundColor: theme.palette.gray,
         color: theme.palette.neon_green,
         textAlign: "center"
