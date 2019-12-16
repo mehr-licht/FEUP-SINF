@@ -9,5 +9,7 @@ export const API_ACCESS_ROUTES = {
   goodsReceipt: `${BASE_API}/goods_receipt/`,
   itemDescription: `${BASE_API}/item_description/`,
   warehouses: `${BASE_API}/warehouses/`,
+  pickingWave: `${BASE_API}/sales_orders_picking/`,
+  shipping: `${BASE_API}/shipping/`,
   transferOrders: `${BASE_API}/transfer_order/`
 };

@@ -14,6 +14,7 @@ const deliveryTermsRouter = require("./routes/deliveryTerms");
 const itemDescriptionRouter = require("./routes/item_description");
 const goodsReceiptRouter = require("./routes/goods_receipt");
 const transferOrderRouter = require("./routes/transfer_order");
+const shippingOrderRouter = require("./routes/shipping");
 const salesOrdersRouter = require("./routes/sales_orders");
 
 app = express();
@@ -32,11 +33,12 @@ app.use("/api/item_description", itemDescriptionRouter);
 app.use("/api/goods_receipt", goodsReceiptRouter);
 app.use("/api/transfer_order", transferOrderRouter);
 app.use("/api/sales_orders_picking", salesOrdersRouter);
+app.use("/api/shipping", shippingOrderRouter);
 
 const PORT = 3001;
 
 db.sequelize
-  .sync({ force: true })
+  .sync(/*{ force: true }*/)
   .then(() => {
     logger.info("Database connected...");
     app.listen(PORT, () => {

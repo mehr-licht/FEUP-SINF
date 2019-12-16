@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from '@reach/router';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
@@ -11,6 +12,10 @@ import {pickedItems} from "./MachipTableRow";
 import { goodsApiRequest } from "../api/goodsApiRequest";
 import { itemDescriptionApiRequest } from "../api/itemDescriptionApiRequest";
 import { transferOrdersApiRequest } from "../api/transferOrdersApiRequest";
+import { getPickingApiRequest } from "../api/getPickingApiRequest";
+import { postPickingApiRequest } from "../api/postPickingApiRequest";
+import { shippingApiRequest } from "../api/shippingApiRequest";
+import { transferOutOrdersApiRequest } from "../api/transferOutOrdersApiRequest";
 
 const styles = theme => ({
   tableLabel: {
@@ -45,6 +50,77 @@ const ReplaceTextFunction = txt => {
   return txt.join(" ");
 };
 
+function onChange(endpoint, info) {
+  if (endpoint === "purchase_orders") {
+    console.log(endpoint)
+    console.log(pickedItems);
+    for (let i = 0; i < pickedItems.length; i++) {
+      goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
+        .then(data => {
+          console.log(data);
+        })
+        .catch(() => {
+          console.log("error");
+        });   
+    }
+  }
+  if (endpoint === "sales_orders") {
+    console.log(endpoint)
+    console.log(pickedItems);
+    postPickingApiRequest(pickedItems)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(() => {
+        console.log("error");
+      });   
+      // goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
+      //   .then(data => {
+      //     console.log(data);
+      //   })
+      //   .catch(() => {
+      //     console.log("error");
+      //   });   
+  }
+  else if(endpoint === "inward"){
+    console.log(info)
+    for (let i = 0; i < info.length; i++) {
+      transferOrdersApiRequest(info[i])
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.log("error", error);
+        });   
+    }
+  }
+  else if(endpoint === "outward") {
+    console.log(pickedItems)
+    for (let i = 0; i < pickedItems.length; i++) {
+      var aux = [pickedItems[i][0], pickedItems[i][1], pickedItems[i][5]]
+      transferOutOrdersApiRequest(aux)
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.log("error", error);
+        });   
+    }
+    for (let i = 0; i < pickedItems.length; i++) {
+      shippingApiRequest(pickedItems[i])
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.log("error", error);
+        });  
+    } 
+  }
+
+  // sleep(3000).then(() => {
+  //   window.location.reload();
+  // })
+}
 
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -80,8 +156,10 @@ function removeDup(info, endpoint) {
     if (info.length) {
       info.forEach(element => {
         if (!seriesNumbers.includes(element.seriesNumber)) {
-          seriesNumbers.push(element.seriesNumber);
-          final_info.push(element);
+          if (element.documentStatus === 1 && element.isDeleted === false) {
+            seriesNumbers.push(element.seriesNumber);
+            final_info.push(element);
+          }
         }
         aux = 0;
       });
@@ -96,6 +174,35 @@ function removeDup(info, endpoint) {
 }
 
 
+function ButtonCustom(props) {
+  const {endpoint} = props;
+  const {classes} = props;
+  const {info} = props;
+  if (endpoint === "purchase_orders") {
+    return (
+      <Button className={classes.sendButton} variant="contained" onClick={() => onChange(endpoint, info)}>
+        Process Products
+      </Button >
+      );
+  }
+  else if (endpoint === "sales_orders") {
+    return (
+      <Button onClick={() => onChange(endpoint, info)} className={classes.sendButton} variant="contained" >Process Orders</Button>
+      );
+  }
+  else if (endpoint === "inward") {
+    return (
+      <Link to="/outward" className="btn btn-primary">Send Items</Link>
+      );
+  }
+  else if (endpoint === "outward") {
+    return (
+      <Button onClick={() => onChange(endpoint, info)} className={classes.sendButton} variant="contained" >Process Orders</Button>
+      );
+  }
+}
+
+
 class MachipTable extends Component {
   constructor(props) {
     super(props);
@@ -105,53 +212,9 @@ class MachipTable extends Component {
     };
   }
 
-  
-  onChange(endpoint, info) {
-    if (endpoint === "purchase_orders") {
-      console.log(endpoint)
-      console.log(pickedItems);
-      for (let i = 0; i < pickedItems.length; i++) {
-        goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
-          .then(data => {
-            console.log(data);
-          })
-          .catch(() => {
-            console.log("error");
-          });   
-      }
-    }
-    if (endpoint === "sales_orders") {
-      console.log(endpoint)
-      console.log(pickedItems);
-      for (let i = 0; i < pickedItems.length; i++) {
-        // goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
-        //   .then(data => {
-        //     console.log(data);
-        //   })
-        //   .catch(() => {
-        //     console.log("error");
-        //   });   
-      }
-    }
-    else if(endpoint === "inward"){
-      console.log(info)
-      for (let i = 0; i < info.length; i++) {
-        transferOrdersApiRequest(info[i])
-          .then(data => {
-            console.log(data);
-          })
-          .catch(error => {
-            console.log("error", error);
-          });   
-      }
-    }
-
-    sleep(3000).then(() => {
-      window.location.reload();
-    })
-  }
 
   componentDidMount() {
+    var tempInfo=[];
     if (this.props.endpoint === "purchase_orders") {
       console.log("Component Did Mount");
       purchaseApiRequest()
@@ -172,32 +235,22 @@ class MachipTable extends Component {
           this.setState({ info: [] });
         });   
     }
-    else{
-      var tempInfo=[];
+    else if(this.props.endpoint === "inward") {
       itemDescriptionApiRequest()
       .then(data => {
         data.forEach(item => {
           item.materialsItemWarehouses.forEach(warehouses => {
-            if (this.props.endpoint === "inward") {
-              if (warehouses.warehouse === '01' && warehouses.stockBalance > 0) {
-                item.materialsItemWarehouses.forEach(destination =>{
-                  if (destination.warehouse !== '01' && destination.warehouse !== '02') {
-                    if (item.itemKey === "RYZEN93950X" && destination.warehouse === 'A00') {
-                      console.log("po crlho")
-                    }
-                    else{
-                      console.log(item.itemKey + ", " + warehouses.stockBalance + '-->' + destination.warehouse);
-                      tempInfo.push([item.itemKey, warehouses.stockBalance, destination.warehouse])
-                    }
+            if (warehouses.warehouse === '01' && warehouses.stockBalance > 0) {
+              item.materialsItemWarehouses.forEach(destination =>{
+                if (destination.warehouse !== '01' && destination.warehouse !== '02') {
+                  if (item.itemKey === "RYZEN93950X" && destination.warehouse === 'A00') {
                   }
-                })
-              }
-            }
-            else{
-              if (warehouses.warehouse === '02' && warehouses.stockBalance > 0) {
-                console.log(item.itemKey + ", " + warehouses.stockBalance);
-                tempInfo.push([item.itemKey, warehouses.stockBalance])
-              }
+                  else{
+                    console.log(item.itemKey + ", " + warehouses.stockBalance + '-->' + destination.warehouse);
+                    tempInfo.push([item.itemKey, warehouses.stockBalance, destination.warehouse])
+                  }
+                }
+              })
             }
           });
         });
@@ -207,7 +260,52 @@ class MachipTable extends Component {
         console.log("Error " + error)
       });   
     }
+    else{
+      getPickingApiRequest()
+        .then(data => {
+          console.log(data.sales_orders)
+          data.sales_orders.forEach(element => {
+            element.picking_list.forEach(element2 => {
+              element2.documentLines.forEach(element3 => {
+                if (element3.salesItem === "PORTES") {
+                }
+                else{
+                  tempInfo.push([element3.salesItem, element3.quantity, element2.naturalKey, element3.index, element2.buyerCustomerPartyName]);
+                }
+              });
+            });
+          });
+          this.setState({info: tempInfo});
+        })
+        .catch(error => {
+          console.log("Error " + error);
+        })
+
+      itemDescriptionApiRequest()
+        .then(data => {
+          data.forEach(item => {
+            item.materialsItemWarehouses.forEach(destination =>{
+              if (destination.warehouse !== '01' && destination.warehouse !== '02') {
+                console.log(item.itemKey + '-->' + destination.warehouse);
+                if (tempInfo.some(row => row.includes(item.itemKey))) {
+                  var index = tempInfo.map(function(elem) {
+                    return elem[0];
+                  }).indexOf(item.itemKey);
+                  tempInfo[index].push(destination.warehouse)
+                  console.log("ola")
+                  //tempInfo.push([item.itemKey, destination.warehouse])           
+                }
+              }
+            })
+          });
+          console.log(tempInfo)
+        })
+        .catch(error => {
+          console.log("Error " + error)
+        });   
+    }
   }
+
 
   render() {
     const { classes } = this.props;
@@ -236,9 +334,7 @@ class MachipTable extends Component {
             ))}
           </tbody>
         </Table>
-        <Button className={classes.sendButton} variant="contained" onClick={() => this.onChange(endpoint, info)}>
-          Send Products
-        </Button >
+        <ButtonCustom info={info} classes={classes} endpoint={endpoint}/>
       </div>
     );
   }

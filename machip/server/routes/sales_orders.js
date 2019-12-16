@@ -43,6 +43,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  console.log(req.body)
   SalesOrders.create(req.body)
     .then(sales_orders => {
       res.status(201).send({ sales_orders });
