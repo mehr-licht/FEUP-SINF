@@ -16,6 +16,7 @@ import { getPickingApiRequest } from "../api/getPickingApiRequest";
 import { postPickingApiRequest } from "../api/postPickingApiRequest";
 import { shippingApiRequest } from "../api/shippingApiRequest";
 import { transferOutOrdersApiRequest } from "../api/transferOutOrdersApiRequest";
+import { deletePickingApiRequest } from "../api/deletePickingApiRequest";
 
 const styles = theme => ({
   tableLabel: {
@@ -97,19 +98,16 @@ function onChange(endpoint, info) {
   else if(endpoint === "outward") {
     console.log(pickedItems)
     for (let i = 0; i < pickedItems.length; i++) {
-      var aux = [pickedItems[i][0], pickedItems[i][1], pickedItems[i][5]]
-      transferOutOrdersApiRequest(aux)
-        .then(data => {
-          console.log(data);
-        })
-        .catch(error => {
-          console.log("error", error);
-        });   
-    }
-    for (let i = 0; i < pickedItems.length; i++) {
       shippingApiRequest(pickedItems[i])
         .then(data => {
           console.log(data);
+          deletePickingApiRequest(pickedItems[i][4])
+            .then(data2 => {
+              console.log(data2)
+            })
+            .catch(error => {
+              console.log("error", error);
+            });  
         })
         .catch(error => {
           console.log("error", error);
@@ -192,7 +190,7 @@ function ButtonCustom(props) {
   }
   else if (endpoint === "inward") {
     return (
-      <Link to="/outward" className="btn btn-primary">Send Items</Link>
+      <Button onClick={() => onChange(endpoint, info)} className={classes.sendButton} variant="contained" >Process Orders</Button>
       );
   }
   else if (endpoint === "outward") {
@@ -265,12 +263,12 @@ class MachipTable extends Component {
         .then(data => {
           console.log(data.sales_orders)
           data.sales_orders.forEach(element => {
-            element.picking_list.forEach(element2 => {
-              element2.documentLines.forEach(element3 => {
-                if (element3.salesItem === "PORTES") {
+            element.picking_list.forEach(order => {
+              order.documentLines.forEach(item => {
+                if (item.salesItem === "PORTES") {
                 }
                 else{
-                  tempInfo.push([element3.salesItem, element3.quantity, element2.naturalKey, element3.index, element2.buyerCustomerPartyName]);
+                  tempInfo.push([item.quantity, order.naturalKey, item.index + 1, item.salesItem, element.id]);
                 }
               });
             });
@@ -280,29 +278,6 @@ class MachipTable extends Component {
         .catch(error => {
           console.log("Error " + error);
         })
-
-      itemDescriptionApiRequest()
-        .then(data => {
-          data.forEach(item => {
-            item.materialsItemWarehouses.forEach(destination =>{
-              if (destination.warehouse !== '01' && destination.warehouse !== '02') {
-                console.log(item.itemKey + '-->' + destination.warehouse);
-                if (tempInfo.some(row => row.includes(item.itemKey))) {
-                  var index = tempInfo.map(function(elem) {
-                    return elem[0];
-                  }).indexOf(item.itemKey);
-                  tempInfo[index].push(destination.warehouse)
-                  console.log("ola")
-                  //tempInfo.push([item.itemKey, destination.warehouse])           
-                }
-              }
-            })
-          });
-          console.log(tempInfo)
-        })
-        .catch(error => {
-          console.log("Error " + error)
-        });   
     }
   }
 

@@ -140,9 +140,9 @@ class MachipTableRow extends React.Component{
             const itemRows = [];
             console.log(item)
             itemRows.push(
-                <tr key={item[0]}>
+                <tr key={item[3]}>
+                    <td>{item[3]}</td>
                     <td>{item[0]}</td>
-                    <td>{item[1]}</td>
                     <td><Checkbox value={item} endpoint={endpoint} onChange={this.onChange}></Checkbox></td>
                 </tr>
             );

@@ -3,9 +3,9 @@ const axios = require("axios");
 
 export const shippingApiRequest = async (item) => {
   const tokenValue = sessionStorage.getItem("token");
-  const itemIndex = item[3] + 1;
-  const itemQuantity = item[1];
-  const naturalKey = item[2];
+  const itemIndex = item[2];
+  const itemQuantity = item[0];
+  const naturalKey = item[1];
   console.log(naturalKey);
   console.log(itemIndex);
   console.log(itemQuantity);

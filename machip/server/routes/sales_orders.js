@@ -26,10 +26,10 @@ router.get("/:id", async (req, res) => {
     .catch(err => res.status(400).send({ error: err }));
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/", async (req, res) => {
   SalesOrders.destroy({
     where: {
-      id: req.params.id
+      id: req.body.id
     }
   })
     .then(sales_order => {
