@@ -19,7 +19,7 @@ import { transferOutOrdersApiRequest } from "../api/transferOutOrdersApiRequest"
 
 const styles = theme => ({
   tableLabel: {
-    paddingBottom: 5
+    paddingBottom: 15
   },
   tableHead: {
     color: theme.palette.green,
@@ -318,7 +318,7 @@ class MachipTable extends Component {
     console.log(info_final);
     return (
       <div>
-        <h4 className={classes.tableLabel}> {ReplaceTextFunction(`${endpoint}`)}</h4>
+        <h2 className={classes.tableLabel}> {ReplaceTextFunction(`${endpoint}`)}</h2>
 
         <Table dark striped bordered hover responsive="sm">
           <thead className={classes.tableHead}>
