@@ -19,13 +19,13 @@ import { transferOutOrdersApiRequest } from "../api/transferOutOrdersApiRequest"
 
 const styles = theme => ({
   tableLabel: {
-    paddingBottom: 25
+    paddingBottom: 5
   },
   tableHead: {
     color: theme.palette.green,
     backgroundColor: theme.palette.gray,
     fontWeight: 'bold',
-    fontSize: '1.5em'
+    fontSize: '1.25em'
   },
   tableBody: {
     color: theme.palette.white,
@@ -334,7 +334,11 @@ class MachipTable extends Component {
             ))}
           </tbody>
         </Table>
-        <ButtonCustom info={info} classes={classes} endpoint={endpoint}/>
+        { this.props.overview ? 
+          <></>
+          : <ButtonCustom info={info} classes={classes} endpoint={endpoint}/>
+        }
+        
       </div>
     );
   }
@@ -342,6 +346,7 @@ class MachipTable extends Component {
 
 MachipTable.propTypes = {
   classes: PropTypes.object.isRequired,
+  overview: PropTypes.bool
 };
 
 export default withStyles(styles)(MachipTable);

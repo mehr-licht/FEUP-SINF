@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import { Col, Row, Container } from "reactstrap";
 import Layout from '../components/common/Layout'
 import MachipTable from '../components/MachipTable'
@@ -29,9 +30,7 @@ const useStyles = makeStyles(theme => ({
         padding: 5,
         backgroundColor: theme.palette.gray,
         color: theme.palette.neon_green,
-        textAlign: "center",
-        maxHeight: '100%',
-        overflow: 'auto'
+        textAlign: "center"
     },
 }));
 
@@ -53,13 +52,25 @@ const Dashboard = () => {
             <Container fluid>
                 <Row>
                     <FormCol table={
-                        <Card className={classes.tableCard} raised>
-                            <MachipTable endpoint="sales_orders" />
-                        </Card>
+                        <Box className={classes.tableCard}>
+                            <MachipTable endpoint="sales_orders" overview/>
+                        </Box>
                     }/>
-                    <FormCol title = "ORDERS"/>
-                    <FormCol title = "INWARD"/>
-                    <FormCol title = "OUTWARD"/>
+                    <FormCol table={
+                        <Box className={classes.tableCard}>
+                            <MachipTable endpoint="purchase_orders" overview/>
+                        </Box>
+                    }/>
+                    <FormCol table={
+                        <Box className={classes.tableCard}>
+                            <MachipTable endpoint="inward" overview/>
+                        </Box>
+                    }/>
+                    <FormCol table={
+                        <Box className={classes.tableCard}>
+                            <MachipTable endpoint="outward" overview/>
+                        </Box>
+                    }/>
                 </Row>
             </Container>
         </Layout>
