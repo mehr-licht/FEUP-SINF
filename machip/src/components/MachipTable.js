@@ -68,20 +68,24 @@ function onChange(endpoint, info) {
   if (endpoint === "sales_orders") {
     console.log(endpoint)
     console.log(pickedItems);
-    postPickingApiRequest(pickedItems)
+    var newPickedItems = []
+    pickedItems.forEach(order => {
+      order.documentLines.forEach(item => {
+        newPickedItems.push({
+          quantity: item.quantity, 
+          naturalKey: order.naturalKey, 
+          index: item.index + 1, 
+          salesItem: item.salesItem
+        })
+      });
+    });
+    postPickingApiRequest(newPickedItems)
       .then(data => {
         console.log(data);
       })
       .catch(() => {
         console.log("error");
       });   
-      // goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
-      //   .then(data => {
-      //     console.log(data);
-      //   })
-      //   .catch(() => {
-      //     console.log("error");
-      //   });   
   }
   else if(endpoint === "inward"){
     console.log(info)
@@ -263,14 +267,9 @@ class MachipTable extends Component {
         .then(data => {
           console.log(data.sales_orders)
           data.sales_orders.forEach(element => {
-            element.picking_list.forEach(order => {
-              order.documentLines.forEach(item => {
-                if (item.salesItem === "PORTES") {
-                }
-                else{
-                  tempInfo.push([item.quantity, order.naturalKey, item.index + 1, item.salesItem, element.id]);
-                }
-              });
+            element.picking_list.forEach(item => {
+                tempInfo.push([item.quantity, item.naturalKey, item.index, item.salesItem, element.id]);
+                console.log(item.id)
             });
           });
           this.setState({info: tempInfo});
