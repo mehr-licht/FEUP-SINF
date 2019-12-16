@@ -329,11 +329,8 @@ class MachipTable extends Component {
             </tr>
           </thead>
           <tbody className={classes.tableBody}>
-            {this.props.overview ? 
-              info_final.slice(0,5).map((item, i) => (
-                <MachipTableRow key={i} item={item} endpoint={endpoint}/>
-              ))
-              : info_final.map((item, i) => (
+            { 
+              info_final.map((item, i) => (
                 <MachipTableRow key={i} item={item} endpoint={endpoint}/>
               ))
             }

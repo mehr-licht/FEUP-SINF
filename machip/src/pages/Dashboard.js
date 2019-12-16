@@ -32,7 +32,9 @@ const useStyles = makeStyles(theme => ({
         paddingRight: 15,
         backgroundColor: theme.palette.gray,
         color: theme.palette.neon_green,
-        textAlign: "center"
+        textAlign: "center",
+        height: '100%',
+        overflow: 'auto',
     },
 }));
 
