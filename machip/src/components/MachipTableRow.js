@@ -81,7 +81,6 @@ class MachipTableRow extends React.Component{
                     <td>{item.seriesNumber}</td>
                     <td>{item.accountingPartyAddress}</td>
                     <td>{item.payableAmount.amount}</td>
-                    <td>{item.documentStatus}</td>
                     <td>{formatTimestamp(item.documentDate)}</td>		
                     <td><Checkbox value={item} endpoint={endpoint} onChange={this.onChange}></Checkbox></td>	
                 </tr>
@@ -94,7 +93,6 @@ class MachipTableRow extends React.Component{
                     <td>{item.seriesNumber}</td>
                     <td>{item.accountingPartyAddress}</td>
                     <td>{item.payableAmount.amount}</td>
-                    <td>{item.documentStatus}</td>
                     <td>{formatTimestamp(item.documentDate)}</td>	
                 </tr>
             ];

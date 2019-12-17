@@ -52,12 +52,17 @@ const ReplaceTextFunction = txt => {
 };
 
 function onChange(endpoint, info) {
+  var aux = 0;
   if (endpoint === "purchase_orders") {
     console.log(endpoint)
     console.log(pickedItems);
     for (let i = 0; i < pickedItems.length; i++) {
       goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
         .then(data => {
+          aux +=1;
+          if (aux === pickedItems.length) {
+            window.location.reload();
+          }
           console.log(data);
         })
         .catch(() => {
@@ -82,6 +87,7 @@ function onChange(endpoint, info) {
     postPickingApiRequest(newPickedItems)
       .then(data => {
         console.log(data);
+        window.location.reload();
       })
       .catch(() => {
         console.log("error");
@@ -92,6 +98,10 @@ function onChange(endpoint, info) {
     for (let i = 0; i < info.length; i++) {
       transferOrdersApiRequest(info[i])
         .then(data => {
+          aux +=1;
+          if (aux === info.length) {
+            window.location.reload();
+          }
           console.log(data);
         })
         .catch(error => {
@@ -107,13 +117,25 @@ function onChange(endpoint, info) {
           console.log(data);
           deletePickingApiRequest(pickedItems[i][4])
             .then(data2 => {
+              aux +=1;
+              if (aux === info.length) {
+                window.location.reload();
+              }
               console.log(data2)
             })
             .catch(error => {
+              aux +=1;
+              if (aux === info.length) {
+                window.location.reload();
+              }
               console.log("error", error);
             });  
         })
         .catch(error => {
+          aux +=1;
+          if (aux === info.length) {
+            window.location.reload();
+          }
           console.log("error", error);
         });  
     } 

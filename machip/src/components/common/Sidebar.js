@@ -51,19 +51,21 @@ const Sidebar = () => {
     >
       <div className={classes.toolbar} />
       <List>
-        {["Overview", "Sales", "Orders", "Picking"].map((text, index) => (
+        {["Overview", "Sales Orders", "Purchase Orders", "Outward", "Inward"].map((text, index) => (
           <ListItem
             button
             key={text}
             onClick={() => {
-              if (text === "Sales") {
+              if (text === "Sales Orders") {
                 navigate("/sales_orders");
               } else if (text === "Overview") {
                 navigate("/dashboard");
-              } else if (text === "Orders") {
+              } else if (text === "Purchase Orders") {
                 navigate("/purchase_orders");
-              } else if (text === "Picking") {
+              } else if (text === "Outward") {
                 navigate("/outward");
+              } else if (text === "Inward") {
+                navigate("/inward");
               }
             }}
           >
@@ -71,6 +73,8 @@ const Sidebar = () => {
               {index % 2 === 0 ? (
                 index - 2 === 0 ? (
                   <AssignmentIcon htmlColor="white" />
+                ) : index - 4 === 0 ? (
+                  <LocalShippingIcon htmlColor="white" />
                 ) : (
                   <DashboardIcon htmlColor="white" />
                 )
