@@ -12,6 +12,5 @@ export const purchaseApiRequest = async () => {
     })
     .catch(error => {
       throw new Error(error);
-      //console.log("Error", error);
     });
 };

@@ -10,7 +10,6 @@ export const deletePickingApiRequest = async (id) => {
       return response.data;
     })
     .catch(error => {
-        console.log("Error", error);
         throw new Error(error);
     });
 };

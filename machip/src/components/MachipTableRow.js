@@ -30,8 +30,7 @@ class MachipTableRow extends React.Component{
                     return elem;
                 }).indexOf(e.target.value);
                 pickedItems.splice(removeIndex, 1);
-            }
-            console.log(pickedItems);            
+            }           
         }
         else if (e.target.endpoint === "sales_orders") {
             if (e.target.checked) {
@@ -43,7 +42,6 @@ class MachipTableRow extends React.Component{
                 }).indexOf(e.target.value);
                 pickedItems.splice(removeIndex, 1);
             }
-            console.log(pickedItems);
         }
         else if (e.target.endpoint === "outward") {
             if (e.target.checked) {
@@ -55,7 +53,6 @@ class MachipTableRow extends React.Component{
                 }).indexOf(e.target.value);
                 pickedItems.splice(removeIndex, 1);
             }
-            console.log(pickedItems);
         }
     }
 
@@ -124,7 +121,6 @@ class MachipTableRow extends React.Component{
         const { endpoint } = this.props;
         if (endpoint === "inward") {
             const itemRows = [];
-            console.log(item)
             itemRows.push(
                 <tr key={item[0]}>
                     <td>{item[0]}</td>
@@ -136,7 +132,6 @@ class MachipTableRow extends React.Component{
         }
         else if (endpoint === "outward") {
             const itemRows = [];
-            console.log(item)
             itemRows.push(
                 <tr key={item[3]}>
                     <td>{item[3]}</td>

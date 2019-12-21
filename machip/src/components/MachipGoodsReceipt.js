@@ -24,11 +24,8 @@ class MachipGoodsReceipt extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params);
-        console.log(`${this.props.endpoint}/${this.props.match.params.id}`);
         MyFetch(`${this.props.endpoint}/${this.props.match.params.page}/${this.props.match.params.size}`,
             (info) => {
-                console.log("INFO PLEASE", info);
                 this.setState({ info });
             },
             (err) => {
@@ -39,7 +36,6 @@ class MachipGoodsReceipt extends Component {
     render() {
         const { info } = this.state;
         const { endpoint } = this.props;
-        console.log();
         // const tableHeaders = MachipTableHeaders[`${endpoint}`];
         return (
             <div>

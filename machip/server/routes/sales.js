@@ -4,7 +4,6 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   const { token } = req.headers;
-  console.log(req.headers);
   axios
     .get(
       "https://my.jasminsoftware.com/api/224895/224895-0001/sales/orders",
@@ -15,7 +14,6 @@ router.get("/", async (req, res) => {
       return res.send(response.data);
     })
     .catch(error => {
-      console.log("Error", error);
       return res.send({ message: "error" });
     });
 });

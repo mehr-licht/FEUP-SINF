@@ -54,8 +54,6 @@ const ReplaceTextFunction = txt => {
 function onChange(endpoint, info) {
   var aux = 0;
   if (endpoint === "purchase_orders") {
-    console.log(endpoint)
-    console.log(pickedItems);
     for (let i = 0; i < pickedItems.length; i++) {
       goodsApiRequest([pickedItems[i][0], pickedItems[i][1]])
         .then(data => {
@@ -63,7 +61,6 @@ function onChange(endpoint, info) {
           if (aux === pickedItems.length) {
             window.location.reload();
           }
-          console.log(data);
         })
         .catch(() => {
           console.log("error");
@@ -71,8 +68,6 @@ function onChange(endpoint, info) {
     }
   }
   if (endpoint === "sales_orders") {
-    console.log(endpoint)
-    console.log(pickedItems);
     var newPickedItems = []
     pickedItems.forEach(order => {
       order.documentLines.forEach(item => {
@@ -86,7 +81,6 @@ function onChange(endpoint, info) {
     });
     postPickingApiRequest(newPickedItems)
       .then(data => {
-        console.log(data);
         window.location.reload();
       })
       .catch(() => {
@@ -94,7 +88,6 @@ function onChange(endpoint, info) {
       });   
   }
   else if(endpoint === "inward"){
-    console.log(info)
     for (let i = 0; i < info.length; i++) {
       transferOrdersApiRequest(info[i])
         .then(data => {
@@ -102,7 +95,6 @@ function onChange(endpoint, info) {
           if (aux === info.length) {
             window.location.reload();
           }
-          console.log(data);
         })
         .catch(error => {
           console.log("error", error);
@@ -110,18 +102,15 @@ function onChange(endpoint, info) {
     }
   }
   else if(endpoint === "outward") {
-    console.log(pickedItems)
     for (let i = 0; i < pickedItems.length; i++) {
       shippingApiRequest(pickedItems[i])
         .then(data => {
-          console.log(data);
           deletePickingApiRequest(pickedItems[i][4])
             .then(data2 => {
               aux +=1;
               if (aux === info.length) {
                 window.location.reload();
               }
-              console.log(data2)
             })
             .catch(error => {
               aux +=1;
@@ -240,7 +229,6 @@ class MachipTable extends Component {
   componentDidMount() {
     var tempInfo=[];
     if (this.props.endpoint === "purchase_orders") {
-      console.log("Component Did Mount");
       purchaseApiRequest()
         .then(data => {
           this.setState({ info: data });
@@ -250,7 +238,6 @@ class MachipTable extends Component {
         });      
     }
     else if(this.props.endpoint === "sales_orders") {
-      console.log("Component Did Mount Sales");
       salesApiRequest()
         .then(data => {
           this.setState({ info: data });
@@ -287,11 +274,9 @@ class MachipTable extends Component {
     else{
       getPickingApiRequest()
         .then(data => {
-          console.log(data.sales_orders)
           data.sales_orders.forEach(element => {
             element.picking_list.forEach(item => {
                 tempInfo.push([item.quantity, item.naturalKey, item.index, item.salesItem, element.id]);
-                console.log(item.id)
             });
           });
           this.setState({info: tempInfo});
@@ -308,10 +293,8 @@ class MachipTable extends Component {
     const { info } = this.state;
     const { endpoint } = this.props;
     const tableHeaders = MachipTableHeaders[`${endpoint}`];
-    console.log("Info", info);
     var info_final = removeDup(info, this.props.endpoint);
     info_final.sort((a, b) => a.seriesNumber - b.seriesNumber);
-    console.log(info_final);
     return (
       <div>
         <h2 className={classes.tableLabel}> {ReplaceTextFunction(`${endpoint}`)}</h2>

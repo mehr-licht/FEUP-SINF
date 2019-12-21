@@ -9,7 +9,6 @@ router.get("/", async (req, res) => {
   const { targetwarehouse } = req.headers;
   const { materialsitem } = req.headers;
   const { quantity } = req.headers;
-  console.log(company + ", " + sourcewarehouse + ", " + targetwarehouse + ", " + materialsitem + ", " + quantity)
   let config = {
     headers: {
       'Authorization': token,
@@ -39,7 +38,6 @@ router.get("/", async (req, res) => {
       return res.send(response.data);
     })
     .catch(error => {
-      //console.log("Error", error);
       return res.send({ message: error });
     });
 });

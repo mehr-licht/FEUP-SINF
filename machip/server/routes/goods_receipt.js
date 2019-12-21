@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   const { itemindex } = req.headers;
   const { itemquantity } = req.headers;
   const { naturalkey } = req.headers;
-  console.log(itemquantity)
   let config = {
     headers: {
       'Authorization': token,
@@ -31,7 +30,6 @@ router.get("/", async (req, res) => {
       return res.send(response.data);
     })
     .catch(error => {
-      //console.log("Error", error);
       return res.send({ message: error });
     });
 });

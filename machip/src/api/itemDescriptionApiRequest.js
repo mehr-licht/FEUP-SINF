@@ -7,11 +7,9 @@ export const itemDescriptionApiRequest = async (item) => {
     headers: { token: tokenValue }
   })
     .then(response => {
-      console.log("Response", response);
       return response.data;
     })
     .catch(error => {
-      console.log("Error", error);
       throw new Error(error);
     });
 };

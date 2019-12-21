@@ -24,11 +24,8 @@ class MachipCard extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params);
-        console.log(`${this.props.endpoint}/${this.props.match.params.id}`);
         MyFetch(`${this.props.endpoint}/${ this.props.match.params.id }`,
             (info) => {
-                console.log("INFO PLEASE", info);
                 this.setState({ info });
             },
             (err) => {
@@ -39,7 +36,6 @@ class MachipCard extends Component {
     render() {
         const { info } = this.state;
         const { endpoint } = this.props;
-        console.log();
        // const tableHeaders = MachipTableHeaders[`${endpoint}`];
         return (
             <div>
@@ -47,7 +43,6 @@ class MachipCard extends Component {
                 <Table striped bordered hover responsive="sm" >
                     <tbody>
                         {Object.entries(info).map(([key, value]) =>
-                            // {console.log(typeof value)}//documentLines
                         <tr key={key}>
                         <td>{key}</td>
                         <td>{value}</td>

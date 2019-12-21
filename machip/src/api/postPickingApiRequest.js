@@ -10,7 +10,6 @@ export const postPickingApiRequest = async (picking_list) => {
       return response.data;
     })
     .catch(error => {
-        console.log("Error", error);
         throw new Error(error);
     });
 };

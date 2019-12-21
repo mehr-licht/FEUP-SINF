@@ -3,7 +3,6 @@ const axios = require("axios");
 
 export const transferOrdersApiRequest = async (item) => {
   const tokenValue = sessionStorage.getItem("token");
-  console.log(item);
   const company = "FEUP-AI";
   const sourcewarehouse = "01";
   const targetwarehouse = item[2];
@@ -21,11 +20,9 @@ export const transferOrdersApiRequest = async (item) => {
     }
   })
     .then(response => {
-      //
       return response.data;
     })
     .catch(error => {
-        console.log("Error", error);
         throw new Error(error);
     });
 };
